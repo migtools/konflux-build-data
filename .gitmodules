@@ -1,0 +1,59 @@
+[submodule "mta-dotnet-external-provider/analyzer-lsp"]
+	path = mta-dotnet-external-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = release-0.7
+[submodule "mta-dotnet-external-provider/csharp-language-server"]
+	path = mta-dotnet-external-provider/csharp-language-server
+	url = https://github.com/razzmatazz/csharp-language-server
+[submodule "mta-analyzer-lsp/analyzer-lsp"]
+	path = mta-analyzer-lsp/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = release-0.7
+[submodule "mta-cli/kantra"]
+	path = mta-cli/kantra
+	url = https://github.com/konveyor/kantra
+	branch = release-0.7
+[submodule "mta-cli/rulesets"]
+	path = mta-cli/rulesets
+	url = https://github.com/konveyor/rulesets
+	branch = release-0.7
+[submodule "mta-cli/windup-rulesets"]
+	path = mta-cli/windup-rulesets
+	url = https://github.com/windup/windup-rulesets
+[submodule "mta-generic-external-provider/analyzer-lsp"]
+	path = mta-generic-external-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = release-0.7
+[submodule "mta-generic-external-provider/tools"]
+	path = mta-generic-external-provider/tools
+	url = https://github.com/golang/tools
+[submodule "mta-golang-dependency-provider/analyzer-lsp"]
+	path = mta-golang-dependency-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = release-0.7
+[submodule "mta-java-external-provider/analyzer-lsp"]
+	path = mta-java-external-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = release-0.7
+[submodule "mta-jdtls-server-base/java-analyzer-bundle"]
+	path = mta-jdtls-server-base/java-analyzer-bundle
+	url = https://github.com/konveyor/java-analyzer-bundle
+	branch = release-0.7
+[submodule "mta-jdtls-server-base/tools"]
+	path = mta-jdtls-server-base/tools
+	url = https://github.com/golang/tools
+[submodule "mta-operator/operator"]
+	path = mta-operator/operator
+	url = https://github.com/konveyor/operator
+	branch = release-0.7
+[submodule "mta-static-report/static-report"]
+	path = mta-static-report/static-report
+	url = https://github.com/konveyor/static-report
+	branch = release-0.7
+[submodule "mta-windup-shim/windup-shim"]
+	path = mta-windup-shim/windup-shim
+	url = https://github.com/konveyor/windup-shim
+	branch = release-0.7
+[submodule "mta-windup-shim/windup-rulesets"]
+	path = mta-windup-shim/windup-rulesets
+	url = https://github.com/windup/windup-rulesets
