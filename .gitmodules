@@ -1,0 +1,56 @@
+[submodule "oadp-kubevirt-velero-plugin/kubevirt-velero-plugin"]
+	path = oadp-kubevirt-velero-plugin/kubevirt-velero-plugin
+	url = https://github.com/kubevirt/kubevirt-velero-plugin
+	branch = release-v0.6
+[submodule "oadp-mustgather/oadp-must-gather"]
+	path = oadp-mustgather/oadp-must-gather
+	url = https://github.com/openshift/oadp-must-gather
+	branch = oadp-1.3
+[submodule "oadp-mustgather/velero"]
+	path = oadp-mustgather/velero
+	url = https://github.com/openshift/velero
+	branch = oadp-1.3
+[submodule "oadp-mustgather/restic"]
+	path = oadp-mustgather/restic
+	url = https://github.com/openshift/restic
+	branch = oadp-1.3
+[submodule "oadp-mustgather/kopia"]
+	path = oadp-mustgather/kopia
+	url = https://github.com/migtools/kopia
+	branch = oadp-1.3
+[submodule "oadp-operator/oadp-operator"]
+	path = oadp-operator/oadp-operator
+	url = https://github.com/openshift/oadp-operator
+	branch = oadp-1.3
+[submodule "oadp-velero-plugin-for-aws/velero-plugin-for-aws"]
+	path = oadp-velero-plugin-for-aws/velero-plugin-for-aws
+	url = https://github.com/openshift/velero-plugin-for-aws
+	branch = oadp-1.3
+[submodule "oadp-velero-plugin-for-gcp/velero-plugin-for-gcp"]
+	path = oadp-velero-plugin-for-gcp/velero-plugin-for-gcp
+	url = https://github.com/openshift/velero-plugin-for-gcp
+	branch = oadp-1.3
+[submodule "oadp-velero-plugin-for-microsoft-azure/velero-plugin-for-microsoft-azure"]
+	path = oadp-velero-plugin-for-microsoft-azure/velero-plugin-for-microsoft-azure
+	url = https://github.com/openshift/velero-plugin-for-microsoft-azure
+	branch = oadp-1.3
+[submodule "oadp-velero-plugin/openshift-velero-plugin"]
+	path = oadp-velero-plugin/openshift-velero-plugin
+	url = https://github.com/openshift/openshift-velero-plugin
+	branch = oadp-1.3
+[submodule "oadp-velero/velero"]
+	path = oadp-velero/velero
+	url = https://github.com/openshift/velero
+	branch = oadp-1.3
+[submodule "oadp-velero/restic"]
+	path = oadp-velero/restic
+	url = https://github.com/openshift/restic
+	branch = oadp-1.3
+[submodule "oadp-velero-restic-restore-helper/velero"]
+	path = oadp-velero-restic-restore-helper/velero
+	url = https://github.com/openshift/velero
+	branch = oadp-1.3
+[submodule "oadp-velero-plugin-for-csi/velero-plugin-for-csi"]
+	path = oadp-velero-plugin-for-csi/velero-plugin-for-csi
+	url = https://github.com/openshift/velero-plugin-for-csi
+	branch = oadp-1.3
