@@ -1,0 +1,52 @@
+[submodule "openshift-migration-controller/mig-controller"]
+	path = openshift-migration-controller/mig-controller
+	url = https://github.com/migtools/mig-controller
+	branch = release-1.8
+[submodule "openshift-migration-controller/crane"]
+	path = openshift-migration-controller/crane
+	url = https://github.com/migtools/crane
+	branch = release-1.8
+[submodule "openshift-migration-hook-runner/hook-runner"]
+	path = openshift-migration-hook-runner/hook-runner
+	url = https://github.com/migtools/hook-runner
+	branch = release-1.8
+[submodule "openshift-migration-log-reader/mig-log-reader"]
+	path = openshift-migration-log-reader/mig-log-reader
+	url = https://github.com/migtools/mig-log-reader
+	branch = release-1.8
+[submodule "openshift-migration-log-reader/stern"]
+	path = openshift-migration-log-reader/stern
+	url = https://github.com/migtools/stern
+	branch = release-1.8
+[submodule "openshift-migration-must-gather/must-gather"]
+	path = openshift-migration-must-gather/must-gather
+	url = https://github.com/migtools/must-gather
+	branch = release-1.8
+[submodule "openshift-migration-must-gather/pprof"]
+	path = openshift-migration-must-gather/pprof
+	url = https://github.com/migtools/pprof
+	branch = konveyor-dev
+[submodule "openshift-migration-openvpn/openvpn"]
+	path = openshift-migration-openvpn/openvpn
+	url = https://github.com/migtools/openvpn
+	branch = release-1.8
+[submodule "openshift-migration-operator/mig-operator"]
+	path = openshift-migration-operator/mig-operator
+	url = https://github.com/migtools/mig-operator
+	branch = release-1.8
+[submodule "openshift-migration-registry/distribution"]
+	path = openshift-migration-registry/distribution
+	url = https://github.com/migtools/distribution
+	branch = release-1.8
+[submodule "openshift-migration-rsync-transfer/rsync-transfer"]
+	path = openshift-migration-rsync-transfer/rsync-transfer
+	url = https://github.com/migtools/rsync-transfer
+	branch = release-1.8
+[submodule "openshift-migration-ui/mig-ui"]
+	path = openshift-migration-ui/mig-ui
+	url = https://github.com/migtools/mig-ui
+	branch = release-1.8
+[submodule "openshift-migration-velero-plugin-for-mtc/velero-plugin-for-mtc"]
+	path = openshift-migration-velero-plugin-for-mtc/velero-plugin-for-mtc
+	url = https://github.com/migtools/velero-plugin-for-mtc
+	branch = release-1.8
