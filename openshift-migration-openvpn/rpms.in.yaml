@@ -1,0 +1,34 @@
+packages:
+  - autoconf
+  - autoconf-archive
+  - automake
+  - dnf-plugins-core
+  - doxygen
+  - gcc
+  - gettext
+  - glibc
+  - glibc-common
+  - glibc-gconv-extra
+  - graphviz
+  - libcap-ng-devel
+  - libcmocka-devel
+  - libnl3-devel
+  - libtool
+  - lz4-devel
+  - lzo-devel
+  - m4
+  - make
+  - openssl-devel
+  - pam-devel
+  - perl-Thread-Queue
+  - python3-docutils
+  - rpm-build
+  - socat
+  - stunnel
+  - systemd-devel
+  - system-rpm-config
+arches:
+- x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo

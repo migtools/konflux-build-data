@@ -1,0 +1,13 @@
+packages:
+ - findutils
+ - graphviz
+ - grep
+ - gzip
+ - jq
+ - rsync
+ - tar
+arches:
+- x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo

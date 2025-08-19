@@ -1,0 +1,10 @@
+packages:
+  - httpd-tools
+  - make
+  - git
+  - file
+arches:
+- x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo
