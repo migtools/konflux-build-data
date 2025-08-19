@@ -1,0 +1,57 @@
+[submodule "mta-analyzer-lsp/analyzer-lsp"]
+	path = mta-analyzer-lsp/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = main
+[submodule "mta-analyzer-rpc/kai"]
+	path = mta-analyzer-rpc/kai
+	url = https://github.com/konveyor/kai
+	branch = main
+[submodule "mta-cli/kantra"]
+	path = mta-cli/kantra
+	url = https://github.com/konveyor/kantra
+	branch = main
+[submodule "mta-cli/rulesets"]
+	path = mta-cli/rulesets
+	url = https://github.com/konveyor/rulesets
+	branch = main
+[submodule "mta-generic-external-provider/analyzer-lsp"]
+	path = mta-generic-external-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = main
+[submodule "mta-golang-dependency-provider/analyzer-lsp"]
+	path = mta-golang-dependency-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = main
+[submodule "mta-java-external-provider/analyzer-lsp"]
+	path = mta-java-external-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = main
+[submodule "mta-jdtls-server-base/java-analyzer-bundle"]
+	path = mta-jdtls-server-base/java-analyzer-bundle
+	url = https://github.com/konveyor/java-analyzer-bundle
+	branch = main
+[submodule "mta-operator/operator"]
+	path = mta-operator/operator
+	url = https://github.com/konveyor/operator
+	branch = main
+[submodule "mta-static-report/static-report"]
+	path = mta-static-report/static-report
+	url = https://github.com/konveyor/static-report
+	branch = main
+[submodule "mta-cli/windup-rulesets"]
+	path = mta-cli/windup-rulesets
+	url = https://github.com/windup/windup-rulesets
+[submodule "mta-generic-external-provider/tools"]
+	path = mta-generic-external-provider/tools
+	url = https://github.com/golang/tools
+[submodule "mta-dotnet-external-provider/analyzer-lsp"]
+	path = mta-dotnet-external-provider/analyzer-lsp
+	url = https://github.com/konveyor/analyzer-lsp
+	branch = main
+[submodule "mta-dotnet-external-provider/csharp-language-server"]
+	path = mta-dotnet-external-provider/csharp-language-server
+	url = https://github.com/razzmatazz/csharp-language-server
+[submodule "mta-solution-server/kai"]
+	path = mta-solution-server/kai
+	url = https://github.com/konveyor/kai
+	branch = main
