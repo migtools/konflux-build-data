@@ -43,7 +43,7 @@ git:
   url: https://github.com/migtools/openvpn
 - automerge: 'yes'
   branch: release-1.8
-  commit: e02d47f919276522bcebbee5ed2da6e280a2f12a
+  commit: 3f9c2d70e7a2732bd6063260d05c289524347f22
   dest_formats: {}
   url: https://github.com/migtools/mig-operator
 - automerge: 'yes'
@@ -53,7 +53,7 @@ git:
   url: https://github.com/migtools/distribution
 - automerge: 'yes'
   branch: release-1.8
-  commit: b46dda4faad28674d091fb5733b14a3ea2105986
+  commit: 130a8d4e9808bae63446d3cb556244d52496c542
   dest_formats: {}
   url: https://github.com/migtools/rsync-transfer
 - automerge: 'yes'
