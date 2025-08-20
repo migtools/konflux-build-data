@@ -1,7 +1,7 @@
 FROM registry.redhat.io/ubi8/nodejs-16:latest AS builder
 COPY --chown=1001:0 mig-ui $APP_ROOT/src
 WORKDIR $APP_ROOT/src
-COPY . .
+COPY mig-ui .
 USER root
 RUN dnf install -y openssl-devel python3
 RUN dnf module install -y nodejs:16/development
@@ -27,7 +27,7 @@ COPY --from=builder $APP_ROOT/src/public/favicon.ico /opt/app-root/src/staticroo
 COPY --from=builder $APP_ROOT/src/public/index.ejs /opt/app-root/src/staticroot
 COPY --from=builder $APP_ROOT/src/deploy/main.js /opt/app-root/src
 COPY --from=builder $APP_ROOT/src/node_modules /opt/app-root/src/node_modules
-COPY LICENSE /licenses/
+COPY mig-ui/LICENSE /licenses/
 
 ENV MIGMETA_FILE="/etc/mig-ui/migmeta.json"
 ENV VIEWS_DIR=/opt/app-root/src/staticroot
