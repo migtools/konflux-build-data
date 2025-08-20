@@ -15,8 +15,8 @@ RUN GOMODCACHE=/workspace/crane/deps/gomod/pkg/mod CGO_ENABLED=1 GOOS=linux GOAR
 #@follow_tag(registry.redhat.io/ubi8/ubi-minimal)
 FROM registry.redhat.io/ubi8/ubi-minimal:latest
 WORKDIR /
-COPY --from=builder /workspace/manager .
+COPY --from=builder /workspace/mig-controller/manager .
 COPY --from=builder /workspace/crane/crane .
-COPY LICENSE /licenses/
+COPY mig-controller/LICENSE /licenses/
 USER 65534:65534
 ENTRYPOINT ["/manager"]
