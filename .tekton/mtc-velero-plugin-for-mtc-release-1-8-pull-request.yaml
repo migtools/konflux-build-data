@@ -8,7 +8,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/cancel-in-progress: 'true'
     pipelinesascode.tekton.dev/max-keep-runs: '3'
-    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "release-1.8" && (".tekton/mtc-velero-plugin-for-mtc-release-1-8-pull-request.yaml".pathChanged() || ".tekton/mtc-velero-plugin-for-mtc-release-1-8-push.yaml".pathChanged() || "openshift-migration-velero-plugin-for-mtc/***".pathChanged())
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "release-1.8" && (".tekton/mtc-velero-plugin-for-mtc-release-1-8-pull-request.yaml".pathChanged() || ".tekton/mtc-velero-plugin-for-mtc-release-1-8-push.yaml".pathChanged() || "openshift-migration-velero-plugin-for-mtc/***".pathChanged() || "openshift-migration-velero-plugin-for-mtc/velero-plugin-for-mtc".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: rhmtc-1-8
