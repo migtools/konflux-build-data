@@ -1,10 +1,10 @@
 arches:
 - arch: x86_64
   module_metadata:
-  - checksum: sha256:895708cee69d4fedddd58e75d23f76aeb910f5eb8223761c8e2ecc4ce27f4d8a
+  - checksum: sha256:98f6a86e7d3ff08c9ecc64bc07c60855991cb2a80ed8f20a1f468c5769702f6b
     repoid: rhel-8-for-x86_64-appstream-rpms
-    size: 739499
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/repodata/895708cee69d4fedddd58e75d23f76aeb910f5eb8223761c8e2ecc4ce27f4d8a-modules.yaml.gz
+    size: 746790
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/repodata/98f6a86e7d3ff08c9ecc64bc07c60855991cb2a80ed8f20a1f468c5769702f6b-modules.yaml.gz
   packages:
   - checksum: sha256:431771be67b56dfedf810d889c8d0ac8229eef29ffb122928041dc24de7475ee
     evr: 1.9.101-1.el8ost
@@ -139,13 +139,13 @@ arches:
     size: 51660
     sourcerpm: vim-8.0.1763-19.el8_6.4.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/v/vim-filesystem-8.0.1763-19.el8_6.4.noarch.rpm
-  - checksum: sha256:00cd8d7a426bfd9c80fc94077b0c87a8a7d60cd90442dc7665f6f8676452bcd7
-    evr: 1:26.1-13.el8_10
+  - checksum: sha256:3752a72be8d33b701a01e746dc2f8d56e2ba7829baa5f2bf3f1a590d8267c60a
+    evr: 1:26.1-15.el8_10
     name: emacs-filesystem
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 72256
-    sourcerpm: emacs-26.1-13.el8_10.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/e/emacs-filesystem-26.1-13.el8_10.noarch.rpm
+    size: 72500
+    sourcerpm: emacs-26.1-15.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/e/emacs-filesystem-26.1-15.el8_10.noarch.rpm
   - checksum: sha256:73c29baa2cd94f1ae6a1d1333818969a281b16dd4262f413ad284c5333719a4d
     evr: 1.22.3-18.el8
     name: groff-base
@@ -202,13 +202,13 @@ arches:
     size: 1545496
     sourcerpm: perl-Encode-2.97-3.el8.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-Encode-2.97-3.el8.x86_64.rpm
-  - checksum: sha256:b077b72ea9761dfd6a6d53a88ad1c2ef81c91698e6730fe4da802c93515140e5
-    evr: 1.28-422.el8
+  - checksum: sha256:1489ff9dac875ee8f6c929fe28b004912f6104ba9849603f3610d2d8e1b934ae
+    evr: 1.28-423.el8_10
     name: perl-Errno
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 78368
-    sourcerpm: perl-5.26.3-422.el8.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-Errno-1.28-422.el8.x86_64.rpm
+    size: 78572
+    sourcerpm: perl-5.26.3-423.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-Errno-1.28-423.el8_10.x86_64.rpm
   - checksum: sha256:7c385e32c12b2639232f74a5dfdfef86daf82e5418bc292c5ab2640fb5cf46dc
     evr: 5.72-396.el8
     name: perl-Exporter
@@ -244,13 +244,13 @@ arches:
     size: 60116
     sourcerpm: perl-HTTP-Tiny-0.074-3.el8.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-HTTP-Tiny-0.074-3.el8.noarch.rpm
-  - checksum: sha256:61c1eb74dcdbff918676bdf1ee3b7dec14f6cf3201c88b96e62e2e92cb4b3410
-    evr: 1.38-422.el8
+  - checksum: sha256:d5fc71a78e60651634d9efbfd4e5ad386aec77929ac855437ba0e1322d218763
+    evr: 1.38-423.el8_10
     name: perl-IO
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 145752
-    sourcerpm: perl-5.26.3-422.el8.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-IO-1.38-422.el8.x86_64.rpm
+    size: 145948
+    sourcerpm: perl-5.26.3-423.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-IO-1.38-423.el8_10.x86_64.rpm
   - checksum: sha256:78c75125187f1f8d66a6106ea7b07e8cf2b57c18bf85f6dd888842464b128a5c
     evr: 3.15-396.el8
     name: perl-MIME-Base64
@@ -363,27 +363,27 @@ arches:
     size: 25956
     sourcerpm: perl-constant-1.33-396.el8.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-constant-1.33-396.el8.noarch.rpm
-  - checksum: sha256:1d041e2c086d3ca598a780715a15e6dd34583f5e03add5c55e1da677e9b1746c
-    evr: 4:5.26.3-422.el8
+  - checksum: sha256:8505819ca7031e26a638e29f34e8808454a07c0828125976bdc0a3dda8291439
+    evr: 4:5.26.3-423.el8_10
     name: perl-interpreter
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 6622284
-    sourcerpm: perl-5.26.3-422.el8.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-interpreter-5.26.3-422.el8.x86_64.rpm
-  - checksum: sha256:1fd03ff6a45935df8f1c93d8dd4919d46aba52ebb0d3b2dbab1bde85607c72a9
-    evr: 4:5.26.3-422.el8
+    size: 6622556
+    sourcerpm: perl-5.26.3-423.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-interpreter-5.26.3-423.el8_10.x86_64.rpm
+  - checksum: sha256:34a52f691b8b1a740651589dda3643649fe54be9d1bb96337cd42b7361317b50
+    evr: 4:5.26.3-423.el8_10
     name: perl-libs
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 1633888
-    sourcerpm: perl-5.26.3-422.el8.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-libs-5.26.3-422.el8.x86_64.rpm
-  - checksum: sha256:9e8e213d365f3f4d2eb49da38757fc0798c5263af8d441b7df0bab1762f98f7b
-    evr: 4:5.26.3-422.el8
+    size: 1633784
+    sourcerpm: perl-5.26.3-423.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-libs-5.26.3-423.el8_10.x86_64.rpm
+  - checksum: sha256:458d91cfbed0495cf14355c5901ad1f1c00a7e0a20bbe7efe1aa81ce130e0371
+    evr: 4:5.26.3-423.el8_10
     name: perl-macros
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 74284
-    sourcerpm: perl-5.26.3-422.el8.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-macros-5.26.3-422.el8.x86_64.rpm
+    size: 74476
+    sourcerpm: perl-5.26.3-423.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/p/perl-macros-5.26.3-423.el8_10.x86_64.rpm
   - checksum: sha256:abe578c5dee7c306812e241c77ebc8ba4b54f90df8e65c56f8f202ba6e0d7183
     evr: 1:0.237-1.el8
     name: perl-parent
@@ -518,12 +518,12 @@ arches:
     repoid: rhel-8-for-x86_64-appstream-source-rpms
     size: 106574
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/source/SRPMS/Packages/p/perl-libnet-3.11-3.el8.src.rpm
-  - checksum: sha256:302fc2e7df4c6912cd349b739fde793bcc9f785b260d1ac406f37a5012b47512
-    evr: 1:26.1-13.el8_10
+  - checksum: sha256:0ae17757b5e99bef9393d2d25c4bfc5884c48b825307a71b3c330dd72558aa1e
+    evr: 1:26.1-15.el8_10
     name: emacs
     repoid: rhel-8-for-x86_64-baseos-source-rpms
-    size: 44386554
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/e/emacs-26.1-13.el8_10.src.rpm
+    size: 44390925
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/e/emacs-26.1-15.el8_10.src.rpm
   - checksum: sha256:3d70ed8c7784143119218a32b413fa210c04f380018c6c801a33f7e33885ed19
     evr: 1.22.3-18.el8
     name: groff
@@ -548,12 +548,12 @@ arches:
     repoid: rhel-8-for-x86_64-baseos-source-rpms
     size: 7738034
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/o/openssl-1.1.1k-12.el8_9.src.rpm
-  - checksum: sha256:846caf250e9bc506d779db0a1f94c181cb1278db67a89cfeb8ad9863cf8475a3
-    evr: 4:5.26.3-422.el8
+  - checksum: sha256:13ac3027330c74ee2f6180e1790c5c29b0311675997cbeb57adb5825de6774a7
+    evr: 4:5.26.3-423.el8_10
     name: perl
     repoid: rhel-8-for-x86_64-baseos-source-rpms
-    size: 14612935
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/p/perl-5.26.3-422.el8.src.rpm
+    size: 14617799
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/p/perl-5.26.3-423.el8_10.src.rpm
   - checksum: sha256:6e54cfe6173d114d79ad787616debfcd361215cb706a073849e5b725e9d602f5
     evr: 1.42-396.el8
     name: perl-Carp
