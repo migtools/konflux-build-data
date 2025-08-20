@@ -51,13 +51,13 @@ arches:
     size: 147292
     sourcerpm: gd-2.2.5-7.el8.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/g/gd-2.2.5-7.el8.x86_64.rpm
-  - checksum: sha256:ac7fdd4cee4c3fd59787f59c5bf273e2c1c4a1884259ef03feaa9faeb7da4959
-    evr: 2.36.12-6.el8_10
+  - checksum: sha256:21b53a48c6c21a29f43e0ee92d6c9b8b1bf4110045b4619862c0e7ff20d20102
+    evr: 2.36.12-7.el8_10
     name: gdk-pixbuf2-modules
     repoid: rhel-8-for-x86_64-appstream-rpms
-    size: 111460
-    sourcerpm: gdk-pixbuf2-2.36.12-6.el8_10.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/g/gdk-pixbuf2-modules-2.36.12-6.el8_10.x86_64.rpm
+    size: 111672
+    sourcerpm: gdk-pixbuf2-2.36.12-7.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/g/gdk-pixbuf2-modules-2.36.12-7.el8_10.x86_64.rpm
   - checksum: sha256:6e9953f840cafb8811043b7ebf88c6670eb24e652011bdbe2bf2bc416f4a702e
     evr: 20120715-13.el8
     name: google-droid-sans-fonts
@@ -128,13 +128,13 @@ arches:
     size: 55980
     sourcerpm: jbigkit-2.1-14.el8.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/j/jbigkit-libs-2.1-14.el8.x86_64.rpm
-  - checksum: sha256:baaa3660d87c4f3c12776e051b7f13835fee8918389a57673519e3389eb7aa3b
-    evr: 1.6-9.el8_10
+  - checksum: sha256:fe609ca5ea627f11fc4cd55cca0279f220f82e49045bfd59c38b560c82167662
+    evr: 1.6-11.el8_10
     name: jq
     repoid: rhel-8-for-x86_64-appstream-rpms
-    size: 207896
-    sourcerpm: jq-1.6-9.el8_10.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/j/jq-1.6-9.el8_10.x86_64.rpm
+    size: 208552
+    sourcerpm: jq-1.6-11.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/appstream/os/Packages/j/jq-1.6-11.el8_10.x86_64.rpm
   - checksum: sha256:7f2796df5a80f13ea11b3988175cc34cc2964d411480114c6c94671f054adf43
     evr: 2.9-2.el8
     name: lcms2
@@ -541,13 +541,13 @@ arches:
     size: 189528
     sourcerpm: dbus-1.12.8-26.el8.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/d/dbus-libs-1.12.8-26.el8.x86_64.rpm
-  - checksum: sha256:00cd8d7a426bfd9c80fc94077b0c87a8a7d60cd90442dc7665f6f8676452bcd7
-    evr: 1:26.1-13.el8_10
+  - checksum: sha256:3752a72be8d33b701a01e746dc2f8d56e2ba7829baa5f2bf3f1a590d8267c60a
+    evr: 1:26.1-15.el8_10
     name: emacs-filesystem
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 72256
-    sourcerpm: emacs-26.1-13.el8_10.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/e/emacs-filesystem-26.1-13.el8_10.noarch.rpm
+    size: 72500
+    sourcerpm: emacs-26.1-15.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/e/emacs-filesystem-26.1-15.el8_10.noarch.rpm
   - checksum: sha256:d01df6f542762d94bd73a87f61d19fb98a6304eb9a2eb114a872a91d3312ea34
     evr: 2.2.5-17.el8_10
     name: expat
@@ -583,13 +583,13 @@ arches:
     size: 403276
     sourcerpm: freetype-2.9.1-10.el8_10.src.rpm
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/f/freetype-2.9.1-10.el8_10.x86_64.rpm
-  - checksum: sha256:5181f4e31412ff38a53b392799d55ec0bb6876104ba68aa930a4e99d4128a651
-    evr: 2.36.12-6.el8_10
+  - checksum: sha256:da82fb06650a8afdebef603f0ac9a2adb2abb1bdbbaac5be544ac91f2250b5fc
+    evr: 2.36.12-7.el8_10
     name: gdk-pixbuf2
     repoid: rhel-8-for-x86_64-baseos-rpms
-    size: 477652
-    sourcerpm: gdk-pixbuf2-2.36.12-6.el8_10.src.rpm
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/g/gdk-pixbuf2-2.36.12-6.el8_10.x86_64.rpm
+    size: 477764
+    sourcerpm: gdk-pixbuf2-2.36.12-7.el8_10.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/os/Packages/g/gdk-pixbuf2-2.36.12-7.el8_10.x86_64.rpm
   - checksum: sha256:7f80be301cda8a6af027f15898058b1f62a0069f347a84aecb2a9c7b4c6d1ef7
     evr: 1.9-13.el8_5
     name: gzip
@@ -686,12 +686,12 @@ arches:
     repoid: rhel-8-for-x86_64-baseos-source-rpms
     size: 2149642
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/d/dbus-1.12.8-26.el8.src.rpm
-  - checksum: sha256:302fc2e7df4c6912cd349b739fde793bcc9f785b260d1ac406f37a5012b47512
-    evr: 1:26.1-13.el8_10
+  - checksum: sha256:0ae17757b5e99bef9393d2d25c4bfc5884c48b825307a71b3c330dd72558aa1e
+    evr: 1:26.1-15.el8_10
     name: emacs
     repoid: rhel-8-for-x86_64-baseos-source-rpms
-    size: 44386554
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/e/emacs-26.1-13.el8_10.src.rpm
+    size: 44390925
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/e/emacs-26.1-15.el8_10.src.rpm
   - checksum: sha256:41de03fcbf3a8f7fa42e7017058ae0186e98a0e448ce01772de7af0a856a749d
     evr: 2.2.5-17.el8_10
     name: expat
@@ -722,12 +722,12 @@ arches:
     repoid: rhel-8-for-x86_64-baseos-source-rpms
     size: 4345090
     url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/f/freetype-2.9.1-10.el8_10.src.rpm
-  - checksum: sha256:c2d10ab85495130101b444b44f77598ef2830d6d29b6e799750ded84bb9d81a7
-    evr: 2.36.12-6.el8_10
+  - checksum: sha256:ba3c43738d470a41e9162358e47d649426d82ebc8297f3df861cb44190a3a2ac
+    evr: 2.36.12-7.el8_10
     name: gdk-pixbuf2
     repoid: rhel-8-for-x86_64-baseos-source-rpms
-    size: 5790838
-    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/g/gdk-pixbuf2-2.36.12-6.el8_10.src.rpm
+    size: 5791986
+    url: https://cdn.redhat.com/content/dist/rhel8/8/x86_64/baseos/source/SRPMS/Packages/g/gdk-pixbuf2-2.36.12-7.el8_10.src.rpm
   - checksum: sha256:cca21983255b0d999938c7a42a43d6402ab4bce1dbd058a16d6c4a2e6b95d763
     evr: 1.9-13.el8_5
     name: gzip
