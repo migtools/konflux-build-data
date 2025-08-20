@@ -9,6 +9,6 @@ RUN GO111MODULE=auto CGO_ENABLED=1 GOOS=linux go build -mod=readonly -v -install
 FROM registry.redhat.io/ubi8/ubi-minimal:latest
 RUN mkdir /plugins
 COPY --from=builder /workspace/_output/$BIN /plugins/
-COPY LICENSE /licenses/
+COPY velero-plugin-for-mtc/LICENSE /licenses/
 USER 65534:65534
 ENTRYPOINT ["/bin/bash", "-c", "cp /plugins/* /target/."]
