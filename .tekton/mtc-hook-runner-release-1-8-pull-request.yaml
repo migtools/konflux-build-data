@@ -6,12 +6,10 @@ metadata:
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
-    pipelinesascode.tekton.dev/cancel-in-progress: "true"
-    pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch
-      == "mtc-1.8" && ( "openshift-migration-hook-runner/***".pathChanged() || ".tekton/mtc-hook-runner-release-1-8-pull-request.yaml".pathChanged()
-      )
-  creationTimestamp: null
+    pipelinesascode.tekton.dev/cancel-in-progress: 'true'
+    pipelinesascode.tekton.dev/max-keep-runs: '3'
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "mtc-1.8" && (".tekton/mtc-hook-runner-release-1-8-pull-request.yaml".pathChanged() || ".tekton/mtc-hook-runner-release-1-8-push.yaml".pathChanged() || "openshift-migration-hook-runner/***".pathChanged() || "openshift-migration-hook-runner/hook-runner".pathChanged())
+  creationTimestamp:
   labels:
     appstudio.openshift.io/application: mtc-1-8
     appstudio.openshift.io/component: mtc-hook-runner-release-1-8
@@ -33,19 +31,24 @@ spec:
     - linux/x86_64
   - name: dockerfile
     value: Dockerfile
+  - name: hermetic
+    value: 'true'
   - name: path-context
     value: openshift-migration-hook-runner
   pipelineSpec:
-    description: |
-      This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
+    description: 'This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
+
 
       _Uses `buildah` to create a multi-platform container image leveraging [trusted artifacts](https://konflux-ci.dev/architecture/ADR/0036-trusted-artifacts.html). It also optionally creates a source image and runs some build-time tests. This pipeline requires that the [multi platform controller](https://github.com/konflux-ci/multi-platform-controller) is deployed and configured on your Konflux instance. Information is shared between tasks using OCI artifacts instead of PVCs. EC will pass the [`trusted_task.trusted`](https://conforma.dev/docs/policy/packages/release_trusted_task.html#trusted_task__trusted) policy as long as all data used to build the artifact is generated from trusted tasks.
+
       This pipeline is pushed as a Tekton bundle to [quay.io](https://quay.io/repository/konflux-ci/tekton-catalog/pipeline-docker-build-multi-platform-oci-ta?tab=tags)_
+
+      '
     params:
     - description: Source Repository URL
       name: git-url
       type: string
-    - default: ""
+    - default: ''
       description: Revision of the Source Repository
       name: revision
       type: string
@@ -53,41 +56,38 @@ spec:
       name: output-image
       type: string
     - default: .
-      description: Path to the source code of an application's component from where
-        to build image.
+      description: Path to the source code of an application's component from where to build image.
       name: path-context
       type: string
     - default: Dockerfile
-      description: Path to the Dockerfile inside the context specified by parameter
-        path-context
+      description: Path to the Dockerfile inside the context specified by parameter path-context
       name: dockerfile
       type: string
-    - default: "false"
+    - default: 'false'
       description: Force rebuild image
       name: rebuild
       type: string
-    - default: "false"
+    - default: 'false'
       description: Skip checks against built image
       name: skip-checks
       type: string
-    - default: "false"
+    - default: 'false'
       description: Execute the build with network isolation
       name: hermetic
       type: string
-    - default: ""
+    - default: ''
       description: Build dependencies to be prefetched by Cachi2
       name: prefetch-input
       type: string
-    - default: ""
-      description: Image tag expiration time, time values could be something like
-        1h, 2d, 3w for hours, days, and weeks, respectively.
+    - default: ''
+      description: Image tag expiration time, time values could be something like 1h, 2d, 3w for hours, days, and weeks, respectively.
       name: image-expires-after
       type: string
-    - default: "false"
+    - default: 'false'
       description: Build a source image.
       name: build-source-image
       type: string
-    - default: "true"
+    - default: 'true'
       description: Add built image into an OCI image index
       name: build-image-index
       type: string
@@ -95,32 +95,30 @@ spec:
       description: Array of --build-arg values ("arg=value" strings) for buildah
       name: build-args
       type: array
-    - default: ""
+    - default: ''
       description: Path to a file with build arguments for buildah, see https://www.mankier.com/1/buildah-build#--build-arg-file
       name: build-args-file
       type: string
-    - default: "false"
-      description: Whether to enable privileged mode, should be used only with remote
-        VMs
+    - default: 'false'
+      description: Whether to enable privileged mode, should be used only with remote VMs
       name: privileged-nested
       type: string
     - default:
       - linux/x86_64
-      description: List of platforms to build the container images on. The available
-        set of values is determined by the configuration of the multi-platform-controller.
+      description: List of platforms to build the container images on. The available set of values is determined by the configuration of the multi-platform-controller.
       name: build-platforms
       type: array
     results:
-    - description: ""
+    - description: ''
       name: IMAGE_URL
       value: $(tasks.build-image-index.results.IMAGE_URL)
-    - description: ""
+    - description: ''
       name: IMAGE_DIGEST
       value: $(tasks.build-image-index.results.IMAGE_DIGEST)
-    - description: ""
+    - description: ''
       name: CHAINS-GIT_URL
       value: $(tasks.clone-repository.results.url)
-    - description: ""
+    - description: ''
       name: CHAINS-GIT_COMMIT
       value: $(tasks.clone-repository.results.commit)
     tasks:
@@ -166,7 +164,7 @@ spec:
       - input: $(tasks.init.results.build)
         operator: in
         values:
-        - "true"
+        - 'true'
       workspaces:
       - name: basic-auth
         workspace: git-auth
@@ -229,7 +227,21 @@ spec:
       - name: CACHI2_ARTIFACT
         value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
       - name: IMAGE_APPEND_PLATFORM
-        value: "true"
+        value: 'true'
+      - name: LABELS
+        value:
+        - $(tasks.generate-labels.results.labels[*])
+        - License=ASL 2.0
+        - com.redhat.component=openshift-migration-hook-runner-container
+        - io.k8s.description=Migration Toolkit for Containers Hook Runner
+        - io.k8s.display-name=Migration Toolkit for Containers
+        - io.openshift.build.source-location=https://github.com/migtools/hook-runner
+        - io.openshift.tags=migration
+        - maintainer=Migration Team <ocp-migrate-team@redhat.com>
+        - name=rhmtc/openshift-migration-hook-runner-rhel8
+        - summary=Migration Toolkit for Containers Hook Runner
+        - vendor=Red Hat, Inc.
+        - version=v1.8.10
       runAfter:
       - prefetch-dependencies
       taskRef:
@@ -245,7 +257,7 @@ spec:
       - input: $(tasks.init.results.build)
         operator: in
         values:
-        - "true"
+        - 'true'
     - name: build-image-index
       params:
       - name: IMAGE
@@ -274,7 +286,7 @@ spec:
       - input: $(tasks.init.results.build)
         operator: in
         values:
-        - "true"
+        - 'true'
     - name: build-source-image
       params:
       - name: BINARY_IMAGE
@@ -300,11 +312,11 @@ spec:
       - input: $(tasks.init.results.build)
         operator: in
         values:
-        - "true"
+        - 'true'
       - input: $(params.build-source-image)
         operator: in
         values:
-        - "true"
+        - 'true'
     - name: deprecated-base-image-check
       params:
       - name: IMAGE_URL
@@ -326,7 +338,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - name: clair-scan
       params:
       - name: image-digest
@@ -348,7 +360,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - matrix:
         params:
         - name: platform
@@ -373,7 +385,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - name: sast-snyk-check
       params:
       - name: image-digest
@@ -399,7 +411,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - matrix:
         params:
         - name: image-arch
@@ -426,7 +438,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - name: sast-coverity-check
       params:
       - name: image-digest
@@ -471,7 +483,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
       - input: $(tasks.coverity-availability-check.results.STATUS)
         operator: in
         values:
@@ -492,7 +504,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - name: sast-shell-check
       params:
       - name: image-digest
@@ -518,7 +530,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - name: sast-unicode-check
       params:
       - name: image-digest
@@ -544,13 +556,16 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
     - name: apply-tags
       params:
       - name: IMAGE_URL
         value: $(tasks.build-image-index.results.IMAGE_URL)
       - name: IMAGE_DIGEST
         value: $(tasks.build-image-index.results.IMAGE_DIGEST)
+      - name: ADDITIONAL_TAGS
+        value:
+        - pull-request-{{pull_request_number}}
       runAfter:
       - build-image-index
       taskRef:
@@ -606,7 +621,29 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - 'false'
+    - name: generate-labels
+      params:
+      - name: label-templates
+        value:
+        - build-date=$SOURCE_DATE
+        - short-commit=$(tasks.clone-repository.results.short-commit)
+        - io.openshift.build.commit.id=$(tasks.clone-repository.results.commit)
+        - io.openshift.build.commit.url=https://github.com/migtools/hook-runner/commit/$(tasks.clone-repository.results.commit)
+        - release=$ACTUAL_DATE_EPOCH
+      - name: source-date-epoch
+        value: $(tasks.clone-repository.results.commit-timestamp)
+      runAfter:
+      - clone-repository
+      taskRef:
+        params:
+        - name: name
+          value: generate-labels
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-generate-labels:0.1@sha256:e1f4746dc33206a17867ead8f5c82a569cd925d352a19d108f205f54efc5589d
+        - name: kind
+          value: task
+        resolver: bundles
     workspaces:
     - name: git-auth
       optional: true
