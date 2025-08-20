@@ -25,7 +25,7 @@ FROM registry.redhat.io/ubi8/ubi-minimal:latest
 RUN microdnf -y install httpd-tools && microdnf clean all
 COPY --from=builder /workspace/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=builder /workspace/src/github.com/docker/distribution/bin/registry /bin/registry
-COPY LICENSE /licenses/
+COPY distribution/LICENSE /licenses/
 VOLUME ["/var/lib/registry"]
 EXPOSE 5000
 USER 65534:65534
