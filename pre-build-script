@@ -1,0 +1,224 @@
+#!/usr/bin/env python3
+"""Run customizations for container - hermetic version."""
+
+import hashlib
+import os
+import sys
+import configparser
+import logging
+from pathlib import Path
+
+CONFIG_FILENAME = "pre-build-script.cfg"
+MAX_SEARCH_DEPTH = 2
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+
+
+def dequote(s: str) -> str:
+    """
+    If a string has single or double quotes around it, remove them.
+    Make sure the pair of quotes match.  If a matching pair of quotes
+    is not found, or there are less than 2 characters, return the
+    string unchanged.
+    """
+    if len(s) >= 2 and s[0] == s[-1] and s[0] in ("'", '"'):
+        return s[1:-1]
+    return s
+
+
+def find_config_file(start_path: str = ".") -> str:
+    """
+    Find pre-build-script.cfg file starting from current directory,
+    searching up to MAX_SEARCH_DEPTH levels deep in subdirectories,
+    and also searching up the directory tree.
+
+    Returns the path to the config file if found, None otherwise.
+    """
+    start_path = Path(start_path).resolve()
+
+    # First check current directory
+    config_path = start_path / CONFIG_FILENAME
+    if config_path.exists():
+        logger.info(f"Found config file: {config_path}")
+        return str(config_path)
+
+    # Search parent directories up to MAX_SEARCH_DEPTH levels up
+    current_dir = start_path
+    for level in range(1, MAX_SEARCH_DEPTH + 1):
+        parent_dir = current_dir.parent
+        if parent_dir == current_dir:  # Reached filesystem root
+            break
+        config_path = parent_dir / CONFIG_FILENAME
+        if config_path.exists():
+            logger.info(f"Found config file {level} level(s) up: {config_path}")
+            return str(config_path)
+        current_dir = parent_dir
+
+    # Search subdirectories up to MAX_SEARCH_DEPTH levels deep
+    for depth in range(1, MAX_SEARCH_DEPTH + 1):
+        for root, dirs, files in os.walk(start_path):
+            # Calculate current depth relative to start_path
+            current_depth = len(Path(root).relative_to(start_path).parts)
+            if current_depth > depth:
+                continue
+
+            if CONFIG_FILENAME in files:
+                config_path = Path(root) / CONFIG_FILENAME
+                logger.info(f"Found config file at depth {current_depth}: {config_path}")
+                return str(config_path)
+
+    return None
+
+
+def get_us_df(us_df_file: str, config_file_path: str) -> bytes:
+    """
+    Read the upstream Dockerfile from local filesystem.
+
+    Raises FileNotFoundError or IOError on failure.
+    Returns file content as bytes
+    """
+    try:
+        us_df_file_path = Path(us_df_file)
+        if not us_df_file_path.is_absolute():
+            # Make relative paths relative to the config file's directory
+            config_dir = Path(config_file_path).parent
+            us_df_file_path = config_dir / us_df_file_path
+
+        # Resolve any .. or . components in the path
+        us_df_file_path = us_df_file_path.resolve()
+
+        logger.info(f"Reading Dockerfile from: {us_df_file_path}")
+
+        if not us_df_file_path.exists():
+            raise FileNotFoundError(f"Dockerfile not found: {us_df_file_path}")
+
+        with open(us_df_file_path, "rb") as f:
+            return f.read()
+
+    except (FileNotFoundError, IOError, OSError) as e:
+        logger.error(f"Error reading Dockerfile {us_df_file}: {e}")
+        raise
+
+
+def validate_us_df(us_df_file: str, us_df_sha256_expected: str, config_file_path: str) -> bool:
+    """
+    Verify the upstream reference Dockerfile sha256 digest
+    has not changed from what has been previously recorded.
+
+    Returns True if digest matches, False otherwise.
+    """
+    logger.info("Comparing digest...")
+    us_df_file_cleaned = dequote(us_df_file)
+
+    try:
+        us_df_content = get_us_df(us_df_file_cleaned, config_file_path)
+        us_df_digest_calculated = hashlib.sha256(us_df_content).hexdigest()
+    except (FileNotFoundError, IOError, OSError) as e:
+        logger.critical(f"Failed to read upstream Dockerfile for validation: {e}")
+        return False  # Indicate validation failure
+
+    if us_df_digest_calculated == us_df_sha256_expected:
+        logger.info("    Upstream Dockerfile digest matches recorded value.")
+        return True
+    else:
+        # Resolve the full path for the error message
+        us_df_file_path = Path(us_df_file_cleaned)
+        if not us_df_file_path.is_absolute():
+            config_dir = Path(config_file_path).parent
+            us_df_file_path = config_dir / us_df_file_path
+
+        file_digest_cmd = f"hashlib.sha256(open('{us_df_file_path}', 'rb').read()).hexdigest()"
+        python_cmd_example = f"import hashlib; print({file_digest_cmd})"
+
+        logger.critical(
+            f"""    Upstream Dockerfile has changed!
+
+Expected SHA256: {us_df_sha256_expected}
+Calculated SHA256: {us_df_digest_calculated}
+File: {us_df_file_path}
+
+Update 'us_df_sha256' value in {CONFIG_FILENAME} to match the new content after
+reconciling differences manually.
+
+Example to generate new value:
+    python3 -c "{python_cmd_example}"
+"""
+        )
+        return False
+
+
+def main():
+    """Main function to run customizations for container."""
+
+    logger.info(
+        f"Python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    )
+
+    logger.info("-" * 72)
+    logger.info(f"############ {sys.argv[0]} ############")
+    logger.info("-" * 72)
+    logger.info("Environment:")
+    logger.info("-" * 72)
+    for n, v in os.environ.items():
+        logger.info(f"{n}: {v}")
+    logger.info("-" * 72)
+
+    # Find the configuration file
+    config_file_path = find_config_file()
+    if not config_file_path:
+        logger.critical(
+            f"Configuration file '{CONFIG_FILENAME}' not found in current directory or up to {MAX_SEARCH_DEPTH} levels deep. Exiting."
+        )
+        sys.exit(1)
+
+    config = configparser.ConfigParser()
+
+    try:
+        config.read(config_file_path)
+        logger.info(f"Successfully loaded configuration from: {config_file_path}")
+    except configparser.Error as e:
+        logger.critical(f"Error parsing configuration file '{config_file_path}': {e}. Exiting.")
+        sys.exit(1)
+
+    overall_success = True
+
+    # Process sections
+    for section in config.sections():
+        if "Dockerfile" in section:
+            logger.info(f"Processing '{section}' section...")
+
+            us_df_sha256 = None
+            us_df_file = None
+
+            try:
+                us_df_sha256 = config.get(section, "us_df_sha256")
+                # Support both old 'us_df_url' and new 'us_df_file' for backward compatibility
+                if config.has_option(section, "us_df_file"):
+                    us_df_file = config.get(section, "us_df_file")
+                elif config.has_option(section, "us_df_url"):
+                    us_df_file = config.get(section, "us_df_url")
+                    logger.warning(
+                        f"Using deprecated 'us_df_url' option as file path. Consider renaming to 'us_df_file'."
+                    )
+                else:
+                    raise configparser.NoOptionError("us_df_file", section)
+
+            except configparser.NoOptionError as e:
+                logger.error(f"Missing required option in section '{section}': {e}. Skipping section.")
+                overall_success = False
+                continue  # Move to next section if options are missing
+
+            if not validate_us_df(us_df_file, us_df_sha256, config_file_path):
+                overall_success = False
+
+    if not overall_success:
+        logger.critical("-" * 72)
+        sys.exit(1)
+    else:
+        logger.info("All Dockerfile validations passed successfully.")
+        sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()
