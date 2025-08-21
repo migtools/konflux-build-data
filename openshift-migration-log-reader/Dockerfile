@@ -18,3 +18,5 @@ RUN mkdir -p /var/cache/sa2kubeconfig
 USER 65534:65534
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+
+LABEL io.openshift.build.source-location=https://github.com/migtools/mig-log-reader/THIS-IS-A-TEST
