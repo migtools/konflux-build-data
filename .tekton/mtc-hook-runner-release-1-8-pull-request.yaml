@@ -244,6 +244,7 @@ spec:
         - version=v1.8.10
       runAfter:
       - prefetch-dependencies
+      - migtools-pre-build-script
       taskRef:
         params:
         - name: name
@@ -641,6 +642,31 @@ spec:
           value: generate-labels
         - name: bundle
           value: quay.io/konflux-ci/tekton-catalog/task-generate-labels:0.1@sha256:7d3895b11c66998c5c7c0deac168c514114e990cbb2fcda8d3dfb1dbd3440c60
+        - name: kind
+          value: task
+        resolver: bundles
+    - name: migtools-pre-build-script
+      params:
+      - name: ociStorage
+        value: $(params.output-image).script
+      - name: ociArtifactExpiresAfter
+        value: $(params.image-expires-after)
+      - name: SCRIPT_RUNNER_IMAGE
+        value: quay.io/redhat-user-workloads/ocp-art-tenant/migtools-migtools-run-script:0.1@sha256:902cb2efaa5dde26bbb24efe21c4c23bcf5ec977bb4cf7c46c74700083a87f32
+      - name: SCRIPT
+        value: /usr/local/bin/pre-build-script
+      - name: HERMETIC
+        value: $(params.hermetic)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+      runAfter:
+      - prefetch-dependencies
+      taskRef:
+        params:
+        - name: name
+          value: run-script-oci-ta
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-run-script-oci-ta:0.1@sha256:1dcc9805bdc20708f87126455c01e0c49be9d79f0c140220a71c85e49979b96d
         - name: kind
           value: task
         resolver: bundles
