@@ -16,7 +16,7 @@ git:
   url: https://github.com/migtools/hook-runner
 - automerge: 'yes'
   branch: release-1.8
-  commit: b37a89e91c52f98d3a6f2d4ddd17b60c9da02602
+  commit: e40bc9a652edf0c2656537510fff8a3a386c3706
   dest_formats: {}
   url: https://github.com/migtools/mig-log-reader
 - automerge: 'yes'
@@ -43,7 +43,7 @@ git:
   url: https://github.com/migtools/openvpn
 - automerge: 'yes'
   branch: release-1.8
-  commit: 3f9c2d70e7a2732bd6063260d05c289524347f22
+  commit: f534ea01c4b0c407ae6f0860bcaf007365471fb8
   dest_formats: {}
   url: https://github.com/migtools/mig-operator
 - automerge: 'yes'
@@ -53,7 +53,7 @@ git:
   url: https://github.com/migtools/distribution
 - automerge: 'yes'
   branch: release-1.8
-  commit: 130a8d4e9808bae63446d3cb556244d52496c542
+  commit: fed1ddb7a9f6370674617dc6f936d226a901754e
   dest_formats: {}
   url: https://github.com/migtools/rsync-transfer
 - automerge: 'yes'
