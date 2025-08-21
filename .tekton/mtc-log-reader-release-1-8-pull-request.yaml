@@ -235,7 +235,6 @@ spec:
         - com.redhat.component=openshift-migration-log-reader-container
         - io.k8s.description=Migration Toolkit for Containers Log Reader
         - io.k8s.display-name=Migration Toolkit for Containers
-        - io.openshift.build.source-location=https://github.com/migtools/mig-log-reader
         - io.openshift.tags=migration
         - maintainer=Migration Team <ocp-migrate-team@redhat.com>
         - name=rhmtc/openshift-migration-log-reader-rhel8
