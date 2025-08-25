@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Run customizations for container - hermetic version."""
 
+import argparse
 import hashlib
 import os
 import sys
@@ -148,8 +149,74 @@ Example to generate new value:
         return False
 
 
+def print_tree(directory: str = ".", show_hidden: bool = False):
+    """
+    Print a tree-like directory structure similar to the Linux 'tree' command.
+
+    Args:
+        directory: The directory to display
+        show_hidden: Whether to show hidden files and directories
+    """
+    path = Path(directory)
+    if not path.exists():
+        logger.info(f"Directory '{directory}' does not exist")
+        return
+
+    # Build and display the tree
+    _print_tree_body(path, show_hidden)
+
+
+def _print_tree_body(directory: Path, show_hidden: bool = False, prefix: str = ""):
+    """
+    Recursively print the tree body structure.
+
+    Args:
+        directory: The directory to process
+        show_hidden: Whether to show hidden files and directories
+        prefix: The prefix string for the current level
+    """
+    try:
+        items = list(directory.iterdir())
+    except PermissionError:
+        return
+
+    # Filter out hidden files if not requested
+    if not show_hidden:
+        items = [item for item in items if not item.name.startswith(".")]
+
+    # Sort items: directories first, then files, both alphabetically
+    items.sort(key=lambda x: (x.is_file(), x.name.lower()))
+
+    # Process each item
+    for i, item in enumerate(items):
+        is_last_item = i == len(items) - 1
+        connector = "└── " if is_last_item else "├── "
+
+        if item.is_dir():
+            logger.info(f"{prefix}{connector}{item.name}/")
+            # Determine new prefix for subdirectory
+            new_prefix = prefix + ("    " if is_last_item else "│   ")
+            _print_tree_body(item, show_hidden, new_prefix)
+        else:
+            logger.info(f"{prefix}{connector}{item.name}")
+
+
 def main():
     """Main function to run customizations for container."""
+
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Run customizations for container - hermetic version.")
+    parser.add_argument(
+        "--env",
+        action="store_true",
+        help="Display environment variables",
+    )
+    parser.add_argument(
+        "--tree",
+        action="store_true",
+        help="Display directory tree structure (similar to 'tree .' command) in addition to normal processing",
+    )
+    args = parser.parse_args()
 
     logger.info(
         f"Python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
@@ -157,12 +224,22 @@ def main():
 
     logger.info("-" * 72)
     logger.info(f"############ {sys.argv[0]} ############")
-    logger.info("-" * 72)
-    logger.info("Environment:")
-    logger.info("-" * 72)
-    for n, v in os.environ.items():
-        logger.info(f"{n}: {v}")
-    logger.info("-" * 72)
+
+    if args.env:
+        logger.info("-" * 72)
+        logger.info("Environment:")
+        logger.info("-" * 72)
+        for n, v in os.environ.items():
+            logger.info(f"{n}: {v}")
+        logger.info("-" * 72)
+
+    # If --tree option is specified, display directory tree first
+    if args.tree:
+        logger.info("-" * 72)
+        logger.info("Directory tree structure:")
+        logger.info("-" * 72)
+        print_tree(".")
+        logger.info("-" * 72)
 
     # Find the configuration file
     config_file_path = find_config_file()
