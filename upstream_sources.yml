@@ -26,7 +26,7 @@ git:
   url: https://github.com/openshift/restic
 - automerge: 'yes'
   branch: oadp-1.3
-  commit: 485d112cbcc0cba6efcbf61522ddba839ac23388
+  commit: 94be9804b98e542eec92c326203f25a80488cbfe
   dest_formats: {}
   url: https://github.com/openshift/openshift-velero-plugin
 - automerge: 'yes'
