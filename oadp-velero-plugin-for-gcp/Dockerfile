@@ -11,7 +11,7 @@ FROM registry.redhat.io/ubi9/ubi-minimal:latest
 RUN microdnf -y install openssl && microdnf -y reinstall tzdata && microdnf clean all
 RUN mkdir /plugins
 COPY --from=builder /workspace/velero-plugin-for-gcp/bin/velero-plugin-for-gcp /plugins/
-COPY /workspace/velero-plugin-for-gcp/LICENSE /licenses/
+COPY --from=builder /workspace/velero-plugin-for-gcp/LICENSE /licenses/
 USER nobody:nogroup
 ENTRYPOINT ["/bin/bash", "-c", "cp /plugins/* /target/."]
 

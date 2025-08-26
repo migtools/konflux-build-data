@@ -62,6 +62,6 @@ COPY --from=ose-cli /usr/bin/oc /usr/bin/oc
 COPY --from=builder /workspace/kopia/kopia /usr/bin/kopia
 COPY --from=builder /workspace/oadp-must-gather/gather /usr/bin/gather
 COPY --from=builder /workspace/oadp-must-gather/deprecated/gather_* /usr/bin/
-COPY /workspace/oadp-must-gather/LICENSE /licenses/
+COPY --from=builder /workspace/oadp-must-gather/LICENSE /licenses/
 
 ENTRYPOINT /usr/bin/gather

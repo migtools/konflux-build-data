@@ -12,7 +12,7 @@ FROM registry.redhat.io/ubi9/ubi-minimal:latest
 RUN microdnf -y install openssl && microdnf -y reinstall tzdata && microdnf clean all
 WORKDIR /
 COPY --from=builder /workspace/oadp-operator/bin/manager .
-COPY /workspace/oadp-operator/LICENSE /licenses/
+COPY --from=builder /workspace/oadp-operator/LICENSE /licenses/
 USER 65532:65532
 ENTRYPOINT ["/manager"]
 

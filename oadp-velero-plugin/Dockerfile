@@ -15,6 +15,6 @@ FROM registry.redhat.io/ubi9/ubi-minimal:latest
 RUN microdnf -y install openssl && microdnf -y reinstall tzdata && microdnf clean all
 RUN mkdir /plugins
 COPY --from=builder /workspace/src/github.com/konveyor/openshift-velero-plugin/_output/$BIN /plugins/
-COPY /workspace/openshift-velero-plugin/LICENSE /licenses/
+COPY --from=builder /workspace/openshift-velero-plugin/LICENSE /licenses/
 USER nobody:nogroup
 ENTRYPOINT ["/bin/bash", "-c", "cp /plugins/* /target/."]

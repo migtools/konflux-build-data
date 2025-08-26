@@ -9,7 +9,7 @@ RUN CGO_ENABLED=1 GOOS=linux go build -a -mod=readonly -tags strictfipsruntime -
 FROM registry.redhat.io/ubi9/ubi-minimal:latest
 RUN microdnf -y install nmap-ncat openssl && microdnf -y reinstall tzdata && microdnf clean all
 COPY --from=builder /workspace/velero/bin/velero-restore-helper velero-restore-helper
-COPY /workspace/velero/LICENSE /licenses/
+COPY --from=builder /workspace/velero/LICENSE /licenses/
 
 USER 65534:65534
 
