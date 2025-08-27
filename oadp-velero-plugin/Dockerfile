@@ -1,5 +1,6 @@
 #@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:rhel_9_golang_1.23)
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.23 AS builder
+COPY . /workspace/
 COPY . /app-root
 RUN mkdir -p /workspace/src/github.com/konveyor/openshift-velero-plugin
 RUN mv /app-root/openshift-velero-plugin/* /workspace/src/github.com/konveyor/openshift-velero-plugin
