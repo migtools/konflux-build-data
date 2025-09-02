@@ -216,6 +216,11 @@ def main():
         action="store_true",
         help="Display directory tree structure (similar to 'tree .' command) in addition to normal processing",
     )
+    parser.add_argument(
+        "--config",
+        type=str,
+        help="Path to pre-build-script.cfg file (e.g., oadp-operator/pre-build-script.cfg). If not provided, searches for config file using default behavior.",
+    )
     args = parser.parse_args()
 
     logger.info(
@@ -242,12 +247,21 @@ def main():
         logger.info("-" * 72)
 
     # Find the configuration file
-    config_file_path = find_config_file()
-    if not config_file_path:
-        logger.critical(
-            f"Configuration file '{CONFIG_FILENAME}' not found in current directory or up to {MAX_SEARCH_DEPTH} levels deep. Exiting."
-        )
-        sys.exit(1)
+    if args.config:
+        # Use the provided config file path
+        config_file_path = args.config
+        if not os.path.exists(config_file_path):
+            logger.critical(f"Specified configuration file '{config_file_path}' does not exist. Exiting.")
+            sys.exit(1)
+        logger.info(f"Using specified config file: {config_file_path}")
+    else:
+        # Use the existing search behavior
+        config_file_path = find_config_file()
+        if not config_file_path:
+            logger.critical(
+                f"Configuration file '{CONFIG_FILENAME}' not found in current directory or up to {MAX_SEARCH_DEPTH} levels deep. Exiting."
+            )
+            sys.exit(1)
 
     config = configparser.ConfigParser()
 
