@@ -7,10 +7,8 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/cancel-in-progress: "false"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
-      == "oadp-1.5" && ( "oadp-operator-bundle/***".pathChanged() || ".tekton/oadp-1-5-bundle-push.yaml".pathChanged()
-      )
-  creationTimestamp: null
+    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "oadp-1.5" && (".tekton/oadp-1-5-bundle-pull-request.yaml".pathChanged() || ".tekton/oadp-1-5-bundle-push.yaml".pathChanged() || "oadp-operator-bundle/***".pathChanged() || "oadp-operator-bundle/oadp-operator".pathChanged())
+  creationTimestamp:
   labels:
     appstudio.openshift.io/application: oadp-1-5
     appstudio.openshift.io/component: oadp-1-5-bundle
@@ -30,6 +28,12 @@ spec:
     - linux/x86_64
   - name: dockerfile
     value: Dockerfile
+  - name: build-image-index
+    value: 'false'
+  - name: hermetic
+    value: 'true'
+  - name: prefetch-input
+    value: '[{"type": "pip", "path": "oadp-operator-bundle/", "allow_binary": "true"}]'
   - name: path-context
     value: oadp-operator-bundle
   pipelineSpec:
@@ -50,13 +54,11 @@ spec:
       name: output-image
       type: string
     - default: .
-      description: Path to the source code of an application's component from where
-        to build image.
+      description: Path to the source code of an application's component from where to build image.
       name: path-context
       type: string
     - default: Dockerfile
-      description: Path to the Dockerfile inside the context specified by parameter
-        path-context
+      description: Path to the Dockerfile inside the context specified by parameter path-context
       name: dockerfile
       type: string
     - default: "false"
@@ -76,8 +78,7 @@ spec:
       name: prefetch-input
       type: string
     - default: ""
-      description: Image tag expiration time, time values could be something like
-        1h, 2d, 3w for hours, days, and weeks, respectively.
+      description: Image tag expiration time, time values could be something like 1h, 2d, 3w for hours, days, and weeks, respectively.
       name: image-expires-after
       type: string
     - default: "false"
@@ -97,14 +98,12 @@ spec:
       name: build-args-file
       type: string
     - default: "false"
-      description: Whether to enable privileged mode, should be used only with remote
-        VMs
+      description: Whether to enable privileged mode, should be used only with remote VMs
       name: privileged-nested
       type: string
     - default:
       - linux/x86_64
-      description: List of platforms to build the container images on. The available
-        set of values is determined by the configuration of the multi-platform-controller.
+      description: List of platforms to build the container images on. The available set of values is determined by the configuration of the multi-platform-controller.
       name: build-platforms
       type: array
     results:
@@ -227,8 +226,36 @@ spec:
         value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
       - name: IMAGE_APPEND_PLATFORM
         value: "true"
+      - name: LABELS
+        value:
+        - $(tasks.generate-labels.results.labels[*])
+        - License=Apache License 2.0
+        - com.redhat.component=oadp-operator-bundle-container
+        - com.redhat.delivery.backport=false
+        - com.redhat.delivery.operator.bundle=true
+        - com.redhat.openshift.versions=v4.19
+        - io.k8s.description=OpenShift API for Data Protection - Operator Bundle
+        - io.k8s.display-name=OADP Operator
+        - io.openshift.tags=migration
+        - maintainer=Migration Toolkit for Containers Team <migtoolkit-team@redhat.com>
+        - name=oadp/oadp-operator-bundle
+        - operators.operatorframework.io.bundle.channel.default.v1=stable
+        - operators.operatorframework.io.bundle.channels.v1=stable
+        - operators.operatorframework.io.bundle.manifests.v1=manifests/
+        - operators.operatorframework.io.bundle.mediatype.v1=registry+v1
+        - operators.operatorframework.io.bundle.metadata.v1=metadata/
+        - operators.operatorframework.io.bundle.package.v1=redhat-oadp-operator
+        - operators.operatorframework.io.metrics.builder=operator-sdk-v1.14.0
+        - operators.operatorframework.io.metrics.mediatype.v1=metrics+v1
+        - operators.operatorframework.io.metrics.project_layout=go.kubebuilder.io/v3
+        - operators.operatorframework.io.test.config.v1=tests/scorecard/
+        - operators.operatorframework.io.test.mediatype.v1=scorecard+v1
+        - summary=OpenShift API for Data Protection - Operator Bundle
+        - vendor=Red Hat, Inc.
+        - version=1.5.1
       runAfter:
       - prefetch-dependencies
+      - migtools-pre-build-script
       taskRef:
         params:
         - name: name
@@ -548,6 +575,11 @@ spec:
         value: $(tasks.build-image-index.results.IMAGE_URL)
       - name: IMAGE_DIGEST
         value: $(tasks.build-image-index.results.IMAGE_DIGEST)
+      - name: ADDITIONAL_TAGS
+        value:
+        - '1.5'
+        - '1.5.1'
+        - 'latest'
       runAfter:
       - build-image-index
       taskRef:
@@ -604,6 +636,53 @@ spec:
         operator: in
         values:
         - "false"
+    - name: generate-labels
+      params:
+      - name: label-templates
+        value:
+        - build-date=$SOURCE_DATE
+        - short-commit=$(tasks.clone-repository.results.short-commit)
+        - io.openshift.build.commit.id=$(tasks.clone-repository.results.commit)
+        - io.openshift.build.commit.url=https://github.com/openshift/oadp-operator/commit/$(tasks.clone-repository.results.commit)
+        - release=$ACTUAL_DATE_EPOCH
+      - name: source-date-epoch
+        value: $(tasks.clone-repository.results.commit-timestamp)
+      runAfter:
+      - clone-repository
+      taskRef:
+        params:
+        - name: name
+          value: generate-labels
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-generate-labels:0.1@sha256:e1f4746dc33206a17867ead8f5c82a569cd925d352a19d108f205f54efc5589d
+        - name: kind
+          value: task
+        resolver: bundles
+    - name: migtools-pre-build-script
+      params:
+      - name: ociStorage
+        value: $(params.output-image).script
+      - name: ociArtifactExpiresAfter
+        value: $(params.image-expires-after)
+      - name: SCRIPT_RUNNER_IMAGE
+        value: quay.io/redhat-user-workloads/ocp-art-tenant/migtools-migtools-run-script:0.1@sha256:aed919647dc17e0125e5089f33c6b762c87a61048940382519765488fde5b57f
+      - name: SCRIPT
+        value: /usr/local/bin/pre-build-script --config oadp-operator-bundle/pre-build-script.cfg
+      - name: HERMETIC
+        value: $(params.hermetic)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+      runAfter:
+      - prefetch-dependencies
+      taskRef:
+        params:
+        - name: name
+          value: run-script-oci-ta
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-run-script-oci-ta:0.1@sha256:1dcc9805bdc20708f87126455c01e0c49be9d79f0c140220a71c85e49979b96d
+        - name: kind
+          value: task
+        resolver: bundles
     workspaces:
     - name: git-auth
       optional: true

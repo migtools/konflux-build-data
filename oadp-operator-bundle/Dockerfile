@@ -1,7 +1,28 @@
+FROM registry.redhat.io/ubi9/python-312:latest@sha256:83b01cf47b22e6ce98a0a4802772fb3d4b7e32280e3a1b7ffcd785e01956e1cb AS builder-runner
+RUN pip3 install ruamel.yaml
+# ############################################################################ #
+
+FROM builder-runner AS builder
+USER root
+COPY update_csv_bundle.py requirements.txt requirements.in relatedImages.yml oadp-csv.cfg /workspace/
+COPY oadp-operator/bundle/manifests/ /workspace/manifests/
+COPY oadp-operator/bundle/metadata/ /workspace/metadata/
+WORKDIR /workspace/
+RUN ./update_csv_bundle.py \
+        --related-images relatedImages.yml \
+        --csv-config oadp-csv.cfg \
+        --upstream-csv manifests/oadp-operator.clusterserviceversion.yaml \
+        --output-csv manifests/oadp-operator.clusterserviceversion.yaml
+USER default
+# ############################################################################ #
+
 FROM scratch
 
-COPY konflux/bundle/manifests /manifests/
-COPY konflux/bundle/metadata /metadata/
+#COPY oadp-operator/bundle/manifests/ /manifests/
+#COPY oadp-operator/bundle/metadata/ /metadata/
+COPY --from=builder /workspace/manifests/ /manifests/
+#COPY --from=builder /workspace/oadp-operator.clusterserviceversion.yaml /manifests/oadp-operator.clusterserviceversion.yaml
+COPY --from=builder /workspace/metadata/ /metadata/
 
 # These are three labels needed to control how the pipeline should handle this container image
 # This first label tells the pipeline that this is a bundle image and should be
