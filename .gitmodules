@@ -58,3 +58,7 @@
 	path = oadp-velero/restic
 	url = https://github.com/openshift/restic
 	branch = oadp-1.5
+[submodule "oadp-operator-bundle/oadp-operator"]
+	path = oadp-operator-bundle/oadp-operator
+	url = https://github.com/openshift/oadp-operator
+	branch = oadp-1.5
