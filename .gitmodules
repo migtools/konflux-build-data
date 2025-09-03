@@ -54,3 +54,7 @@
 	path = oadp-velero-plugin-for-legacy-aws/velero-plugin-for-legacy-aws
 	url = https://github.com/openshift/velero-plugin-for-legacy-aws
 	branch = oadp-1.4
+[submodule "oadp-operator-bundle/oadp-operator"]
+	path = oadp-operator-bundle/oadp-operator
+	url = https://github.com/openshift/oadp-operator
+	branch = oadp-1.4
