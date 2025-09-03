@@ -2,20 +2,19 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/openshift/oadp-operator?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/migtools/konflux-build-data?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/cancel-in-progress: "true"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    # pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "oadp-1.5"
     pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "oadp-1.5" && (".tekton/oadp-1-5-bundle-pull-request.yaml".pathChanged() || ".tekton/oadp-1-5-bundle-push.yaml".pathChanged() || "oadp-operator-bundle/***".pathChanged() || "oadp-operator-bundle/oadp-operator".pathChanged())
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: oadp-1-5
-    appstudio.openshift.io/component: oadp-bundle-oadp-1-5
+    appstudio.openshift.io/component: oadp-1-5-bundle
     pipelines.appstudio.openshift.io/type: build
-  name: oadp-bundle-oadp-1-5-on-pull-request
+  name: oadp-1-5-bundle-on-pull-request
   namespace: ocp-art-tenant
 spec:
   params:
@@ -24,41 +23,28 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-bundle-oadp-1-5:on-pr-{{revision}}
+    value: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-bundle:on-pr-{{revision}}
   - name: image-expires-after
     value: 5d
   - name: build-platforms
     value:
-    - linux/arm64
-    - linux/ppc64le
-    - linux/s390x
     - linux/x86_64
   - name: dockerfile
-    value: konflux/Dockerfile-bundle.oadp
-  - name: hermetic
-    value: 'true'
+    value: Dockerfile
   - name: build-image-index
     value: 'false'
+  - name: hermetic
+    value: 'true'
+  - name: prefetch-input
+    value: '[{"type": "pip", "path": "oadp-operator-bundle/", "allow_binary": "true"}]'
+  - name: path-context
+    value: oadp-operator-bundle
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
 
       _Uses `buildah` to create a multi-platform container image leveraging [trusted artifacts](https://konflux-ci.dev/architecture/ADR/0036-trusted-artifacts.html). It also optionally creates a source image and runs some build-time tests. This pipeline requires that the [multi platform controller](https://github.com/konflux-ci/multi-platform-controller) is deployed and configured on your Konflux instance. Information is shared between tasks using OCI artifacts instead of PVCs. EC will pass the [`trusted_task.trusted`](https://conforma.dev/docs/policy/packages/release_trusted_task.html#trusted_task__trusted) policy as long as all data used to build the artifact is generated from trusted tasks.
       This pipeline is pushed as a Tekton bundle to [quay.io](https://quay.io/repository/konflux-ci/tekton-catalog/pipeline-docker-build-multi-platform-oci-ta?tab=tags)_
-    finally:
-    - name: show-sbom
-      params:
-      - name: IMAGE_URL
-        value: $(tasks.build-image-index.results.IMAGE_URL)
-      taskRef:
-        params:
-        - name: name
-          value: show-sbom
-        - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-show-sbom:0.1@sha256:beb0616db051952b4b861dd8c3e00fa1c0eccbd926feddf71194d3bb3ace9ce7
-        - name: kind
-          value: task
-        resolver: bundles
     params:
     - description: Source Repository URL
       name: git-url
@@ -91,7 +77,7 @@ spec:
       name: hermetic
       type: string
     - default: ""
-      description: Build dependencies to be prefetched by Cachi2
+      description: Build dependencies to be prefetched
       name: prefetch-input
       type: string
     - default: ""
@@ -390,7 +376,12 @@ spec:
         operator: in
         values:
         - "false"
-    - name: ecosystem-cert-preflight-checks
+    - matrix:
+        params:
+        - name: platform
+          value:
+          - $(params.build-platforms)
+      name: ecosystem-cert-preflight-checks
       params:
       - name: image-url
         value: $(tasks.build-image-index.results.IMAGE_URL)
@@ -637,7 +628,7 @@ spec:
         - name: name
           value: rpms-signature-scan
         - name: bundle
-          value: quay.io/konflux-ci/konflux-vanguard/task-rpms-signature-scan:0.2@sha256:49ff6d117c3e9dc3966d1244e118e168b3501742ec14c3a4161a276ff48d04d5
+          value: quay.io/konflux-ci/konflux-vanguard/task-rpms-signature-scan:0.2@sha256:e127e0e0a5aab1364b560436594fe7ed67abcd5f8d6dd3ef14ac1f35cf81078c
         - name: kind
           value: task
         resolver: bundles
@@ -653,7 +644,7 @@ spec:
         - build-date=$SOURCE_DATE
         - short-commit=$(tasks.clone-repository.results.short-commit)
         - io.openshift.build.commit.id=$(tasks.clone-repository.results.commit)
-        - io.openshift.build.commit.url=https://github.com/UPDATE_ORG/UPDATE_REPO/commit/$(tasks.clone-repository.results.commit)
+        - io.openshift.build.commit.url=https://github.com/openshift/oadp-operator/commit/$(tasks.clone-repository.results.commit)
         - release=$ACTUAL_DATE_EPOCH
       - name: source-date-epoch
         value: $(tasks.clone-repository.results.commit-timestamp)
@@ -675,9 +666,9 @@ spec:
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
       - name: SCRIPT_RUNNER_IMAGE
-        value: quay.io/redhat-user-workloads/ocp-art-tenant/migtools-migtools-run-script:0.1@sha256:b0ee48be6ac0ccfecadc32f4c55bf11e0e0b8a41f5bfab2290d565511eee27cb
+        value: quay.io/redhat-user-workloads/ocp-art-tenant/migtools-migtools-run-script:0.1@sha256:aed919647dc17e0125e5089f33c6b762c87a61048940382519765488fde5b57f
       - name: SCRIPT
-        value: /usr/local/bin/pre-build-script
+        value: /usr/local/bin/pre-build-script --config oadp-operator-bundle/pre-build-script.cfg
       - name: HERMETIC
         value: $(params.hermetic)
       - name: SOURCE_ARTIFACT
@@ -699,7 +690,7 @@ spec:
     - name: netrc
       optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-oadp-bundle-oadp-1-5
+    serviceAccountName: build-pipeline-oadp-1-5-bundle
   workspaces:
   - name: git-auth
     secret:
