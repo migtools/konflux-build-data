@@ -36,8 +36,8 @@ USER 65534:65534
 
 #@follow_tag(registry.redhat.io/ubi9/ubi-minimal:latest)
 FROM registry.redhat.io/ubi9/ubi-minimal:latest
-RUN microdnf -y reinstall tzdata && microdnf clean all
-RUN microdnf -y install less nmap-ncat openssl && microdnf clean all
+RUN dnf -y reinstall tzdata && dnf clean all
+RUN dnf -y install less nmap-ncat openssl && dnf clean all
 COPY --from=builder /workspace/bin/velero velero
 COPY --from=builder /workspace/bin/velero-restore-helper velero-restore-helper
 COPY --from=builder /workspace/bin/velero-helper velero-helper
