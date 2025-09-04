@@ -16,12 +16,12 @@ git:
   url: https://github.com/openshift/velero-plugin-for-legacy-aws
 - automerge: 'yes'
   branch: oadp-1.5
-  commit: 08a2db80133a1ea7a72e0356fd8e4dbf3de26976
+  commit: 7df77b0fd5bd17ccc2f4d6628afca01e1c351fdc
   dest_formats: {}
   url: https://github.com/openshift/oadp-operator
 - automerge: 'yes'
   branch: oadp-1.5
-  commit: db545c8e238729247a433ea1d65b7a806fa9c3cd
+  commit: 4b2a43fa75bf585d473fa490355b77c5a1228c82
   dest_formats: {}
   url: https://github.com/openshift/velero
 - automerge: 'yes'
@@ -56,7 +56,7 @@ git:
   url: https://github.com/migtools/oadp-non-admin
 - automerge: 'yes'
   branch: release-v0.8
-  commit: 296c007433b9c50bdcb15a2d09b36d156d251605
+  commit: f0a34535158e92bc40933c5b8bca3315e47458ee
   dest_formats: {}
   url: https://github.com/kubevirt/kubevirt-velero-plugin
 - automerge: 'yes'
