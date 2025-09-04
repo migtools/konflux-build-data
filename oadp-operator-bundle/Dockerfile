@@ -4,7 +4,8 @@ RUN pip3 install ruamel.yaml
 
 FROM builder-runner AS builder
 USER root
-COPY update_csv_bundle.py requirements.txt requirements.in relatedImages.yml oadp-csv.cfg /workspace/
+#COPY oadp-annotations.cfg oadp-csv.cfg pre-build-script.cfg relatedImages.yml update_csv_bundle.py /workspace/
+COPY . /workspace/
 COPY oadp-operator/bundle/manifests/ /workspace/manifests/
 COPY oadp-operator/bundle/metadata/ /workspace/metadata/
 WORKDIR /workspace/
@@ -19,8 +20,8 @@ USER default
 
 FROM scratch
 
-COPY bundle/manifests /manifests/
-COPY bundle/metadata /metadata/
+COPY --from=builder /workspace/manifests/ /manifests/
+COPY --from=builder /workspace/metadata/ /metadata/
 
 # These are three labels needed to control how the pipeline should handle this container image
 # This first label tells the pipeline that this is a bundle image and should be
