@@ -4,13 +4,12 @@ RUN pip3 install ruamel.yaml
 
 FROM builder-runner AS builder
 USER root
-#COPY oadp-annotations.cfg oadp-csv.cfg pre-build-script.cfg relatedImages.yml update_csv_bundle.py /workspace/
 COPY . /workspace/
 COPY oadp-operator/bundle/manifests/ /workspace/manifests/
 COPY oadp-operator/bundle/metadata/ /workspace/metadata/
 WORKDIR /workspace/
 RUN ./update_csv_bundle.py \
-        --related-images relatedImages.yml \
+        --related-images relatedImages.yaml \
         --csv-config oadp-csv.cfg \
         --upstream-csv manifests/oadp-operator.clusterserviceversion.yaml \
         --annotations-config oadp-annotations.cfg \
