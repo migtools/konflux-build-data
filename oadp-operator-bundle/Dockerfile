@@ -4,12 +4,12 @@ RUN pip3 install ruamel.yaml
 
 FROM builder-runner AS builder
 USER root
-COPY update_csv_bundle.py requirements.txt requirements.in relatedImages.yml oadp-csv.cfg /workspace/
+COPY . /workspace/
 COPY oadp-operator/bundle/manifests/ /workspace/manifests/
 COPY oadp-operator/bundle/metadata/ /workspace/metadata/
 WORKDIR /workspace/
 RUN ./update_csv_bundle.py \
-        --related-images relatedImages.yml \
+        --related-images relatedImages.yaml \
         --csv-config oadp-csv.cfg \
         --upstream-csv manifests/oadp-operator.clusterserviceversion.yaml \
         --output-csv manifests/oadp-operator.clusterserviceversion.yaml
