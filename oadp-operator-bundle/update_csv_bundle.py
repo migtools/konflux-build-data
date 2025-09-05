@@ -2,12 +2,12 @@
 """
 Update OADP CSV Bundle for Konflux Hermetic Builds
 
-This script updates an OADP operator CSV file with image references from relatedImages.yml
-for use in hermetic/isolated build environments. It reads the relatedImages.yml file
+This script updates an OADP operator CSV file with image references from relatedImages.yaml
+for use in hermetic/isolated build environments. It reads the relatedImages.yaml file
 and directly overwrites values in the existing "upstream" CSV with Konflux values.
 
 Similar to render_templates but designed for hermetic environments where we cannot
-fetch build information from external sources and must rely on values in relatedImages.yml.
+fetch build information from external sources and must rely on values in relatedImages.yaml.
 """
 
 import argparse
@@ -21,7 +21,7 @@ from ruamel.yaml import YAML
 
 class OADPCSVUpdater:
     """
-    Updates OADP CSV files with values from relatedImages.yml for Konflux hermetic builds.
+    Updates OADP CSV files with values from relatedImages.yaml for Konflux hermetic builds.
     """
 
     def __init__(self, verbose=False):
@@ -40,7 +40,7 @@ class OADPCSVUpdater:
     def normalize_name(self, name):
         """
         Normalize image names by converting hyphens to underscores.
-        This helps match upstream CSV names (with hyphens) to relatedImages.yml names (with underscores).
+        This helps match upstream CSV names (with hyphens) to relatedImages.yaml names (with underscores).
 
         Example: 'kubevirt-velero-plugin' -> 'kubevirt_velero_plugin'
         """
@@ -58,7 +58,7 @@ class OADPCSVUpdater:
 
     def load_related_images(self, related_images_file):
         """
-        Load relatedImages.yml and build mapping dictionaries.
+        Load relatedImages.yaml and build mapping dictionaries.
 
         Expected format:
         - name: operator
@@ -144,7 +144,7 @@ class OADPCSVUpdater:
         This directly overwrites the values from the upstream CSV with our Konflux values.
         If spec.relatedImages doesn't exist, create it with our values.
 
-        Handles name transformation from hyphens to underscores to match relatedImages.yml format.
+        Handles name transformation from hyphens to underscores to match relatedImages.yaml format.
         """
         # Ensure spec section exists
         if "spec" not in csv_data:
@@ -429,26 +429,26 @@ class OADPCSVUpdater:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Update OADP CSV file with values from relatedImages.yml for Konflux hermetic builds",
+        description="Update OADP CSV file with values from relatedImages.yaml for Konflux hermetic builds",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Basic usage
-  %(prog)s --related-images relatedImages.yml --upstream-csv upstream.csv --output-csv output.csv
+  %(prog)s --related-images relatedImages.yaml --upstream-csv upstream.csv --output-csv output.csv
   
   # Full paths example with CSV config
   %(prog)s \\
-    --related-images relatedImages.yml \\
+    --related-images relatedImages.yaml \\
     --csv-config oadp-csv.cfg \\
     --upstream-csv bundle/manifests/oadp-operator.clusterserviceversion.yaml \\
     --output-csv bundle/manifests/oadp-operator.clusterserviceversion.yaml
     
   # Dry run to see what would be changed
-  %(prog)s --related-images relatedImages.yml --upstream-csv upstream.csv --output-csv output.csv --dry-run
+  %(prog)s --related-images relatedImages.yaml --upstream-csv upstream.csv --output-csv output.csv --dry-run
         """,
     )
     parser.add_argument(
-        "--related-images", required=True, help="Path to relatedImages.yml file containing image mappings"
+        "--related-images", required=True, help="Path to relatedImages.yaml file containing image mappings"
     )
     parser.add_argument("--upstream-csv", required=True, help="Path to upstream CSV file to update")
     parser.add_argument("--output-csv", required=True, help="Path to output CSV file")
