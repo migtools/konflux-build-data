@@ -11,7 +11,7 @@
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero-plugin-for-aws@sha256:44ce6ac161d5ba2cebef6325765135da7c2c5dbb20ae2746700dc7ad97ce5c19
   env_var: RELATED_IMAGE_VELERO_PLUGIN_FOR_AWS
 - name: velero_plugin_for_legacy_aws
-  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero-plugin-for-legacy-aws@sha256:62c1e9518605295212158de40e19414bcd84f0a5e6d6ac506df65fba5a2eda41
+  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero-plugin-for-legacy-aws@sha256:bde8e62a6a163083505eeb04a32045606eea590433f89edcb40fd6745c5ce0bc
   env_var: RELATED_IMAGE_VELERO_PLUGIN_FOR_LEGACY_AWS
 - name: velero_plugin_for_microsoft_azure
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero-plugin-for-microsoft-azure@sha256:697defbd36d68858a8b378cc7222167487638f852d1ac2eda63b84f5bacbec1c
