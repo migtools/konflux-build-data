@@ -29,5 +29,5 @@
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-must-gather@sha256:ffae4c8df93fa067f60bf0823a3c2eb2fe17885db48117ceac9809db7404eeb4
   env_var: RELATED_IMAGE_MUSTGATHER
 - name: non_admin_controller
-  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-oadp-non-admin@sha256:8e3f22b97d9b6191fb81c381188135e63c1b00788c0f9f274ed67145a2120150
+  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-oadp-non-admin@sha256:208a139136ff836ef65f2d47d4681aad021281f7e76687e309e8db5c10b2111c
   env_var: RELATED_IMAGE_NON_ADMIN_CONTROLLER
