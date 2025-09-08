@@ -26,7 +26,7 @@
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-hypershift-oadp-plugin@sha256:85e12766310d3e2d266aaa2e2137c690ebfc0fe1a71a0deafd32355e55039ac1
   env_var: RELATED_IMAGE_HYPERSHIFT_VELERO_PLUGIN
 - name: mustgather
-  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-must-gather@sha256:6f183e771233f845b966eb30b987f3226e0b4e2adb1442a2a29de26487c10fd2
+  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-must-gather@sha256:166480eec9f34a9c65c6223c532e8275036bdd243f0e4593964b7f2758c7986e
   env_var: RELATED_IMAGE_MUSTGATHER
 - name: non_admin_controller
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-oadp-non-admin@sha256:208a139136ff836ef65f2d47d4681aad021281f7e76687e309e8db5c10b2111c
