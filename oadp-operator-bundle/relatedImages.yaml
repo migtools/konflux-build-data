@@ -2,7 +2,7 @@
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-operator@sha256:aa484cebcee8bd5eb46f368e3195fb054aa3830bb3c7adc8514fb08682f4d626
   env_var: RELATED_IMAGE_OPERATOR
 - name: velero
-  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero@sha256:b190d6f6acaf14455d688cb616df527cff87292ea3b8cf128b8421a491d59b28
+  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero@sha256:5699aaa761f2896a8db2c98cfaabbf52656669a536ce561ba5132de5e4593d51
   env_var: RELATED_IMAGE_VELERO
 - name: openshift_velero_plugin
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-openshift-velero-plugin@sha256:e1783bcd4c22f8a6116b89cc7d68d1617a8da518ddd0bb9b607011fcafe806c5
