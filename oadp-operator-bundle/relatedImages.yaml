@@ -1,5 +1,5 @@
 - name: operator
-  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-operator@sha256:aa484cebcee8bd5eb46f368e3195fb054aa3830bb3c7adc8514fb08682f4d626
+  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-operator@sha256:afe2707ac5d52995f9947d7cbbadd234fd2481e44128dacbf321fa2b042b2ca7
   env_var: RELATED_IMAGE_OPERATOR
 - name: velero
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-velero@sha256:5699aaa761f2896a8db2c98cfaabbf52656669a536ce561ba5132de5e4593d51
