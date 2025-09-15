@@ -657,7 +657,7 @@ spec:
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
       - name: SCRIPT_RUNNER_IMAGE
-        value: quay.io/redhat-user-workloads/ocp-art-tenant/migtools-migtools-run-script:0.1@sha256:902cb2efaa5dde26bbb24efe21c4c23bcf5ec977bb4cf7c46c74700083a87f32
+        value: quay.io/redhat-user-workloads/ocp-art-tenant/migtools-migtools-run-script:0.1@sha256:8d7eb39ed5a5c0cc481009a903ac0c2c817a1bc583abeaab4624df84fe07d507
       - name: SCRIPT
         value: /usr/local/bin/pre-build-script
       - name: HERMETIC
