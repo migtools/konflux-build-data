@@ -55,3 +55,23 @@
 	path = mta-solution-server/kai
 	url = https://github.com/konveyor/kai
 	branch = main
+[submodule "mta-ui/ui"]
+	path = mta-ui/ui
+	url = https://github.com/konveyor/tackle2-ui.git
+	branch = main
+[submodule "mta-hub/hub"]
+	path = mta-hub/hub
+	url = https://github.com/konveyor/tackle2-hub.git
+	branch = main
+[submodule "mta-discovery-addon/discovery-addon"]
+	path = mta-discovery-addon/discovery-addon
+	url = https://github.com/konveyor/tackle2-addon-discovery.git
+	branch = main
+[submodule "mta-platform-addon/platform-addon"]
+	path = mta-platform-addon/platform-addon
+	url = https://github.com/konveyor/tackle2-addon-platform.git
+	branch = main
+[submodule "mta-analyzer-addon/analyzer-addon"]
+	path = mta-analyzer-addon/analyzer-addon
+	url = https://github.com/konveyor/tackle2-addon-analyzer.git
+	branch = main
