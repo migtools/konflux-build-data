@@ -23,7 +23,7 @@
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-kubevirt-velero-plugin@sha256:43c5cc7aecf461bea0ca2f5bdea168f5a238e0a0f3e57fc957839fc8203e6fe2
   env_var: RELATED_IMAGE_KUBEVIRT_VELERO_PLUGIN
 - name: hypershift_velero_plugin
-  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-hypershift-oadp-plugin@sha256:40a9cb869f4e89452d4d233a1f71c16732b2043c21ea1a959ec737f5de8c84f2
+  image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-hypershift-oadp-plugin@sha256:ccb31bcef6f3a4c5bcf7e6920119111040737f4ef8e7fe6b727a0cf469c7a55c
   env_var: RELATED_IMAGE_HYPERSHIFT_VELERO_PLUGIN
 - name: mustgather
   image: quay.io/redhat-user-workloads/ocp-art-tenant/oadp-1-5-must-gather@sha256:166480eec9f34a9c65c6223c532e8275036bdd243f0e4593964b7f2758c7986e
