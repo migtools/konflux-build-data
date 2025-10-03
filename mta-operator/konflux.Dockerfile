@@ -19,6 +19,11 @@ COPY operator/watches.yaml ${HOME}/watches.yaml
 COPY operator/roles ${HOME}/roles
 COPY operator/playbooks ${HOME}/playbooks
 COPY operator/LICENSE /licenses/
+# Debug
+RUN id ; pwd
+RUN ls -la ${HOME}
+RUN ls -la ${HOME}/roles/
+RUN ls -la ${HOME}/roles/tacke/
 
 # Hack java bundle property location downstream (can't use snapshoted artifacts)
 RUN sed -r -i 's/java-analyzer-bundle.core-1.0.0-SNAPSHOT.jar/java-analyzer-bundle.core.jar/' ${HOME}/roles/tackle/templates/customresource-extension.yml.j2
