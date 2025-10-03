@@ -15,15 +15,15 @@ RUN dnf module list
 #RUN dnf -y module enable postgresql:15 && dnf -y install postgresql python3-psycopg2 python3-jmespath && dnf clean all
 RUN dnf -y install postgresql python3-psycopg2 python3-jmespath && dnf clean all
 USER 1001
-COPY operator/watches.yaml ${HOME}/watches.yaml
-COPY operator/roles ${HOME}/roles
-COPY operator/playbooks ${HOME}/playbooks
-COPY operator/LICENSE /licenses/
+COPY --chown=1001:0 operator/watches.yaml ${HOME}/watches.yaml
+COPY --chown=1001:0 operator/roles ${HOME}/roles
+COPY --chown=1001:0 operator/playbooks ${HOME}/playbooks
+COPY --chown=1001:0 operator/LICENSE /licenses/
 # Debug
 RUN id ; pwd
 RUN ls -la ${HOME}
 RUN ls -la ${HOME}/roles/
-RUN ls -la ${HOME}/roles/tacke/
+RUN ls -la ${HOME}/roles/tackle/
 
 # Hack java bundle property location downstream (can't use snapshoted artifacts)
 RUN sed -r -i 's/java-analyzer-bundle.core-1.0.0-SNAPSHOT.jar/java-analyzer-bundle.core.jar/' ${HOME}/roles/tackle/templates/customresource-extension.yml.j2
