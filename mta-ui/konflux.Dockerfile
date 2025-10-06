@@ -28,20 +28,5 @@ USER 1001
 COPY --from=builder /workspace/ui/dist /opt/app-root/dist/
 COPY --from=builder /workspace/ui/LICENSE /licenses/
 
-LABEL \
-        com.redhat.component="mta-ui-container" \
-        version="$CI_VERSION" \
-        name="mta/mta-ui-rhel9" \
-        license="Apache License 2.0" \
-        io.k8s.display-name="MTA - UI" \
-        io.k8s.description="Migration Toolkit for Applications - UI" \
-        io.openshift.tags="migration,modernization,mta,tackle,konveyor" \
-        io.openshift.build.commit.id="${CI_TACKLE2_UI_UPSTREAM_COMMIT}" \
-        io.openshift.build.source-location="${CI_TACKLE2_UI_UPSTREAM_URL}" \
-        io.openshift.build.commit.url="https://github.com/konveyor/tackle2-ui/commit/${CI_TACKLE2_UI_UPSTREAM_COMMIT}" \
-        summary="Migration Toolkit for Applications - UI" \
-        maintainer="Migration Toolkit for Applications Team <migtoolkit-team@redhat.com>" \
-        build.commit.urls="${CI_TACKLE2_UI_UPSTREAM_URL}/commit/${CI_TACKLE2_UI_UPSTREAM_COMMIT}"
-
 WORKDIR /opt/app-root/dist
 ENTRYPOINT ["./entrypoint.sh"]
