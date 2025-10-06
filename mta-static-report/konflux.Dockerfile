@@ -16,7 +16,7 @@ WORKDIR /workspace/static-report
 COPY ./static-report-assets/logo.svg src/images/logo.svg
 COPY ./static-report-assets/navbar-logo.svg src/images/navbar-logo.svg
 COPY ./static-report-assets/favicon.ico public/favicon.ico
-RUN sed -i "s/_VERSION_/${CI_VERSION}/g" app/public/version.js
+RUN sed -i "s/_VERSION_/${CI_VERSION}/g" public/version.js
 RUN sed -i -e 's/\(name: "\)[^"]*"/\1Migration Toolkit for Applications"/' \
     -e 's/\(websiteURL: "\)[^"]*"/\1https:\/\/developers.redhat.com\/products\/mta\/overview"/' \
     -e 's/\(documentationURL: "\)[^"]*"/\1https:\/\/access.redhat.com\/documentation\/en-us\/migration_toolkit_for_applications"/' \
