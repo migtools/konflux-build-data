@@ -1,8 +1,9 @@
 # Builder image
 FROM registry.redhat.io/ubi9/nodejs-20:1-1758500456 AS builder
-#COPY --chown=1001:0 ./branding-mta branding-mta
+COPY . /workspace
 RUN pwd ; ls -la
-WORKDIR ui
+WORKDIR /workspace/ui
+RUN pwd ; ls -la
 
 # Setup downstream branding (before https://github.com/konveyor/tackle2-ui/pull/1664)
 ENV PROFILE=mta
@@ -27,7 +28,8 @@ RUN microdnf -y update && microdnf -y clean all
 RUN microdnf -y install tar procps-ng && microdnf -y clean all
 USER 1001
 
-COPY --from=builder dist /opt/app-root/dist/
+COPY --from=builder /workspace/ui/dist /opt/app-root/dist/
+COPY --from=builder /workspace/ui/LICENSE /licenses/
 
 LABEL \
         com.redhat.component="mta-ui-container" \
