@@ -1,5 +1,7 @@
 # Builder image
 FROM registry.redhat.io/ubi9/nodejs-20:1-1758500456 AS builder
+#COPY --chown=1001:0 ./branding-mta branding-mta
+RUN pwd ; ls -la
 WORKDIR ui
 
 # Setup downstream branding (before https://github.com/konveyor/tackle2-ui/pull/1664)
@@ -8,6 +10,7 @@ ENV BRAND_TYPE=RedHat
 
 # Setup the build to use downstream branding (after https://github.com/konveyor/tackle2-ui/pull/1664)
 ENV BRANDING=../branding-mta
+RUN pwd ; ls -la
 
 # Allow use of npm10 (see https://github.com/konveyor/tackle2-ui/pull/1781)
 RUN sed -i 's/^    "npm": "^9.5.0"/    "npm": ">=9.5.0"/' package.json
