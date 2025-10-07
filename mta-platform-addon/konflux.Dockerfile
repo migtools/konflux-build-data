@@ -16,7 +16,7 @@ RUN echo -e "StrictHostKeyChecking no" \
 
 ENV HOME=/addon ADDON=/addon
 COPY --from=builder /workspace/platform-addon/bin/addon /usr/bin
-COPY --from=builder /workspace/platform-addon/LICENSE /licences/
+COPY --from=builder /workspace/platform-addon/LICENSE /licenses/
 
 WORKDIR /addon
 
