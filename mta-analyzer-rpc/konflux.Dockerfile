@@ -13,5 +13,8 @@ FROM registry.redhat.io/ubi9-minimal:latest
 COPY --from=builder /workspace/kai/kai_analyzer_rpc/mta-analyzer-rpc /usr/local/bin
 COPY --from=builder /workspace/kai/kai_analyzer_rpc/darwin-mta-analyzer-rpc /usr/local/bin
 COPY --from=builder /workspace/kai/kai_analyzer_rpc/windows-mta-analyzer-rpc /usr/local/bin
+COPY --from-builder /workspace/kai/LICENSE /licenses/
+
+USER 1001
 
 ENTRYPOINT ["/usr/local/bin/mta-analyzer-rpc"]
