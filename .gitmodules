@@ -1,7 +1,7 @@
 [submodule "mta-analyzer-lsp/analyzer-lsp"]
 	path = mta-analyzer-lsp/analyzer-lsp
 	url = https://github.com/konveyor/analyzer-lsp
-	branch = main
+	branch = release-0.8
 [submodule "mta-analyzer-rpc/kai"]
 	path = mta-analyzer-rpc/kai
 	url = https://github.com/konveyor/kai
