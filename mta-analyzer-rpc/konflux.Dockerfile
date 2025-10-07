@@ -3,7 +3,7 @@ COPY --chown=1001:0 . /workspace
 
 # kai_analyzer_rpc does not have a Dockerfile upstream, downstream uses this container as a builder only
 # Build in 3 platforms
-WORKDIR kai/kai_analyzer_rpc
+WORKDIR /workspace/kai/kai_analyzer_rpc
 RUN GOOS=linux go build -o mta-analyzer-rpc
 RUN GOOS=darwin go build -o darwin-mta-analyzer-rpc
 RUN GOOS=windows go build -o windows-mta-analyzer-rpc
