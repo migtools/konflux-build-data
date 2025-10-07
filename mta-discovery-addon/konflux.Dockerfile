@@ -15,5 +15,6 @@ RUN echo -e "StrictHostKeyChecking no" \
 ENV HOME=/addon ADDON=/addon
 WORKDIR /addon
 COPY --from=builder /workspace/discovery-addon/bin/addon /usr/bin
+COPY --from=builder /workspace/discovery-addon/LICENSE /licenses/
 
 ENTRYPOINT ["/usr/bin/addon"]
