@@ -1,4 +1,3 @@
-# https://github.com/konveyor/static-report
 FROM registry.redhat.io/ubi9/go-toolset:1.23 AS go-builder
 COPY --chown=1001:0 . /workspace
 WORKDIR /workspace/static-report/analyzer-output-parser
@@ -6,7 +5,6 @@ WORKDIR /workspace/static-report/analyzer-output-parser
 ENV GOEXPERIMENT strictfipsruntime
 RUN CGO_ENABLED=1 go build -tags strictfipsruntime -o js-bundle-generator ./main.go
 
-# Nodejs
 FROM registry.redhat.io/ubi9/nodejs-18:latest AS nodejs-builder
 COPY --chown=1001:0 . /workspace
 USER 1001
@@ -28,5 +26,6 @@ RUN microdnf -y install openssl && microdnf -y clean all
 
 COPY --from=go-builder /workspace/static-report/analyzer-output-parser/js-bundle-generator /usr/bin/js-bundle-generator
 COPY --from=nodejs-builder /workspace/static-report/build /usr/local/static-report
+COPY --from=nodejs-builder /workspace/static-report/LICENSE /licenses/
 
 ENTRYPOINT ["js-bundle-generator"]

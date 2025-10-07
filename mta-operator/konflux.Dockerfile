@@ -9,7 +9,6 @@ COPY ${COMMUNITY_GENERAL} ${HOME}/${COMMUNITY_GENERAL}
 COPY ${COMMUNITY_POSTGRESQL} ${HOME}/${COMMUNITY_POSTGRESQL}
 RUN ansible-galaxy collection install ${HOME}/${COMMUNITY_GENERAL} ${HOME}/${COMMUNITY_POSTGRESQL} && rm ${HOME}/${COMMUNITY_GENERAL} ${HOME}/${COMMUNITY_POSTGRESQL}
 
-RUN dnf -y update && dnf -y clean all
 RUN dnf module list
 # Fix PG15 is not available on ubi9 streams, needs rhel9 streams, see Brew operator build for details
 #RUN dnf -y module enable postgresql:15 && dnf -y install postgresql python3-psycopg2 python3-jmespath && dnf clean all
@@ -19,26 +18,6 @@ COPY --chown=1001:0 operator/watches.yaml ${HOME}/watches.yaml
 COPY --chown=1001:0 operator/roles ${HOME}/roles
 COPY --chown=1001:0 operator/playbooks ${HOME}/playbooks
 COPY --chown=1001:0 operator/LICENSE /licenses/
-# Debug
-RUN id ; pwd
-RUN ls -la ${HOME}
-RUN ls -la ${HOME}/roles/
-RUN ls -la ${HOME}/roles/tackle/
 
 # Hack java bundle property location downstream (can't use snapshoted artifacts)
 RUN sed -r -i 's/java-analyzer-bundle.core-1.0.0-SNAPSHOT.jar/java-analyzer-bundle.core.jar/' ${HOME}/roles/tackle/templates/customresource-extension.yml.j2
-
-LABEL \
-        com.redhat.component="mta-operator-container" \
-        version="8.0.0" \
-        name="mta/mta-rhel9-operator" \
-        license="Apache License 2.0" \
-        io.k8s.display-name="MTA - Operator" \
-        io.k8s.description="Migration Toolkit for Applications - Operator" \
-        io.openshift.tags="migration,modernization,mta,tackle,konveyor" \
-        io.openshift.build.commit.id="1b49c7ca51a6f118e4417cff12ab9bbf62be6ea9" \
-        io.openshift.build.source-location="https://github.com/konveyor/operator" \
-        io.openshift.build.commit.url="https://github.com/konveyor/operator/commit/1b49c7ca51a6f118e4417cff12ab9bbf62be6ea9" \
-        summary="Migration Toolkit for Applications - Operator" \
-        maintainer="Migration Toolkit for Applications Team <migtoolkit-team@redhat.com>" \
-        build.commit.urls="https://github.com/konveyor/operator/commit/1b49c7ca51a6f118e4417cff12ab9bbf62be6ea9"
