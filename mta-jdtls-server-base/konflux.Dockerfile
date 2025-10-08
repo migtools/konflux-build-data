@@ -6,8 +6,10 @@ RUN microdnf -y install tar gzip && microdnf -y clean all
 #WORKDIR /jdtls
 #COPY artifacts/jdtls-product.tar.gz /jdtls
 #RUN tar -xvf jdtls-product.tar.gz --no-same-owner && chmod 755 /jdtls/bin/jdtls && rm -rf jdtls-product.tar.gz
-COPY java-analyzer-bundle /workspace/
+RUN mkdir -p /workspace/java-analyzer-bundle
+COPY --chown=1001:0 java-analyzer-bundle /workspace/java-analyzer-bundle/
 RUN ls -la /workspace
+RUN ls -la /workspace/java-analyzer-bundle
 
 FROM registry.redhat.io/ubi9-minimal:latest
 RUN microdnf -y module enable maven:3.9
