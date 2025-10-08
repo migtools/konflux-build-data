@@ -1,6 +1,6 @@
-FROM registry.redhat.io/ubi9-minimal:latest AS builder
-COPY --chown=1001:0 . /workspace
-RUN ls -la /workspace
+#FROM registry.redhat.io/ubi9-minimal:latest AS builder
+#COPY --chown=1001:0 . /workspace
+#RUN ls -la /workspace
 
 FROM registry.redhat.io/ubi9-minimal:latest AS pnc-artifacts
 RUN microdnf -y install tar gzip && microdnf -y clean all
@@ -22,15 +22,15 @@ ENV JAVA8_HOME /usr/lib/jvm/java-1.8.0-openjdk
 RUN mvn --version
 
 RUN mkdir /root/.gradle
-COPY --from=builder /workspace/java-analyzer-bundle/gradle/build.gradle /usr/local/etc/task.gradle
-COPY --from=builder /workspace/java-analyzer-bundle/gradle/build-v9.gradle /usr/local/etc/task-v9.gradle
+COPY --from=pnc-artifacts /workspace/java-analyzer-bundle/gradle/build.gradle /usr/local/etc/task.gradle
+COPY --from=pnc-artifacts /workspace/java-analyzer-bundle/gradle/build-v9.gradle /usr/local/etc/task-v9.gradle
 
-COPY --from=builder /workspace/java-analyzer-bundle/hack/maven.default.index /usr/local/etc/maven.default.index
+COPY --from=pnc-artifacts /workspace/java-analyzer-bundle/hack/maven.default.index /usr/local/etc/maven.default.index
 #COPY --from=pnc-artifacts /jdtls /jdtls/
 #COPY --from=pnc-artifacts /opt/java-analyzer-bundle.core.jar /jdtls/java-analyzer-bundle/java-analyzer-bundle.core/target/
 #COPY --from=pnc-artifacts /opt/fernflower.jar /bin/fernflower.jar
-COPY --from=builder /workspace/java-analyzer-bundle/jdtls-bin-override/jdtls.py /jdtls/bin/jdtls.py
-COPY --from=builder /workspace/java-analyzer-bundle/LICENSE /licenses/
+COPY --from=pnc-artifacts /workspace/java-analyzer-bundle/jdtls-bin-override/jdtls.py /jdtls/bin/jdtls.py
+COPY --from=pnc-artifacts /workspace/java-analyzer-bundle/LICENSE /licenses/
 
 RUN ln -sf /root/.m2 /.m2 && chgrp -R 0 /root && chmod -R g=u /root
 
