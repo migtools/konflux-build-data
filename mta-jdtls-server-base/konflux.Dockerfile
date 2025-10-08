@@ -1,17 +1,12 @@
-#FROM registry.redhat.io/ubi9-minimal:latest AS builder
-#COPY --chown=1001:0 . /workspace
-#RUN ls -la /workspace
-
 FROM registry.redhat.io/ubi9-minimal:latest AS pnc-artifacts
 RUN microdnf -y install tar gzip && microdnf -y clean all
-
-# FIX ME
+# FIX ME: PNC artifacts
 #COPY artifacts/fernflower.jar /opt
 #COPY artifacts/java-analyzer-bundle.core.jar /opt
 #WORKDIR /jdtls
 #COPY artifacts/jdtls-product.tar.gz /jdtls
 #RUN tar -xvf jdtls-product.tar.gz --no-same-owner && chmod 755 /jdtls/bin/jdtls && rm -rf jdtls-product.tar.gz
-COPY --chown=1001:0 java-analyzer-bundle /workspace
+COPY java-analyzer-bundle /workspace/
 RUN ls -la /workspace
 
 FROM registry.redhat.io/ubi9-minimal:latest
