@@ -5,10 +5,9 @@ ENV GOEXPERIMENT strictfipsruntime
 # bin/.build is not being tracked downstream as there is not git tree (.git) directory at build time needed by git describe
 RUN make vet && CGO_ENABLED=1 go build -tags json1,strictfipsruntime -o bin/hub github.com/konveyor/tackle2-hub/cmd
 
-# Remove AKS label from Azure target, assumes Azure is the last target listed (fix me)
+# Remove AKS label from Azure target, assumes Azure is the last target listed
 RUN sed -i -e '/Azure\ Kubernetes\ Service/,$d' /workspace/seed/resources/targets.yaml
 
-# Static Report
 FROM brew.registry.redhat.io/rh-osbs/mta-mta-static-report-rhel9:8.0.0 as report
 
 FROM registry.redhat.io/ubi9-minimal:latest
@@ -20,6 +19,7 @@ RUN echo "hub:x:1001:0:hub:/:/sbin/nologin" >> /etc/passwd
 COPY --from=builder /workspace/hub/bin/hub /usr/local/bin/mta-hub
 COPY --from=builder /workspace/hub/auth/roles.yaml /tmp/roles.yaml
 COPY --from=builder /workspace/hub/auth/users.yaml /tmp/users.yaml
+COPY --from=builder /workspace/hub/LICENSE /licenses/
 COPY --from=builder /workspace/seed/resources/ /tmp/seed
 COPY --from=report  /usr/local/static-report /tmp/analysis/report
 
