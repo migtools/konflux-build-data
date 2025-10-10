@@ -10,7 +10,8 @@ RUN make vet && CGO_ENABLED=1 go build -tags json1,strictfipsruntime -o bin/hub 
 #RUN sed -i -e '/Azure\ Kubernetes\ Service/,$d' $REMOTE_SOURCES_DIR/mta-seed/app/resources/targets.yaml
 
 # Static Report
-FROM registry-proxy.engineering.redhat.com/rh-osbs/mta-mta-static-report-rhel9:8.0.1 as report
+#FROM registry-proxy.engineering.redhat.com/rh-osbs/mta-mta-static-report-rhel9:8.0.0 as report
+FROM brew.registry.redhat.io/rh-osbs/mta-mta-static-report-rhel9:8.0.0 as report
 
 FROM registry.redhat.io/ubi9-minimal:latest
 #ARG VERSION=${CI_VERSION}
