@@ -75,3 +75,7 @@
 	path = mta-analyzer-addon/analyzer-addon
 	url = https://github.com/konveyor/tackle2-addon-analyzer.git
 	branch = release-0.8
+[submodule "mta-hub/seed"]
+	path = mta-hub/seed
+	url = https://github.com/konveyor/tackle2-seed
+	branch = release-0.8
