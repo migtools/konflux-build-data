@@ -23,6 +23,7 @@ COPY --from=builder /workspace/analyzer-lsp/external-providers/generic-external-
 COPY --from=builder /workspace/analyzer-lsp/external-providers/golang-dependency-provider/golang-dependency-provider /usr/local/bin/golang-dependency-provider
 COPY --from=builder /workspace/analyzer-lsp/external-providers/java-external-provider/java-external-provider /usr/local/bin/java-external-provider
 COPY --from=builder /workspace/analyzer-lsp/provider_container_settings.json /analyzer-lsp/provider_settings.json
+COPY --from=builder /workspace/analyzer-lsp/LICENSE /licenses/
 
 WORKDIR /analyzer-lsp
 RUN chgrp -R 0 /analyzer-lsp && chmod -R g=u /analyzer-lsp
