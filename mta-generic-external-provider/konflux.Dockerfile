@@ -6,7 +6,7 @@ ENV GOEXPERIMENT strictfipsruntime
 RUN go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=1 go build -tags strictfipsruntime -o generic-external-provider main.go
 
 WORKDIR /workspace/tools/gopls
-RUN source CGO_ENABLED=1 go build -tags strictfipsruntime -buildvcs=false
+RUN CGO_ENABLED=1 go build -tags strictfipsruntime -buildvcs=false
 
 FROM brew.registry.redhat.io/rh-osbs/mta-mta-golang-dependency-provider-rhel9:8.0.0 as go-dep-provider
 
