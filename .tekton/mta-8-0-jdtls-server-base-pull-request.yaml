@@ -34,7 +34,7 @@ spec:
   - name: hermetic
     value: 'true'
   - name: prefetch-input
-    value: '[{"type": "generic", "path": "."} ]'
+    value: '[{"type": "generic", "path": "mta-jdtls-server-base/"} ]'
   - name: dockerfile
     value: konflux.Dockerfile
   - name: path-context
