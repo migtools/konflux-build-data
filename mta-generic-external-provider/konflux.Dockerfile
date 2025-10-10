@@ -5,7 +5,7 @@ WORKDIR /workspace/analyzer-lsp/external-providers/generic-external-provider
 ENV GOEXPERIMENT strictfipsruntime
 RUN go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=1 go build -tags strictfipsruntime -o generic-external-provider main.go
 
-WORKDIR /workspace/go-tools/gopls
+WORKDIR /workspace/tools/gopls
 RUN source CGO_ENABLED=1 go build -tags strictfipsruntime -buildvcs=false
 
 FROM brew.registry.redhat.io/rh-osbs/mta-mta-golang-dependency-provider-rhel9:8.0.0 as go-dep-provider
@@ -28,7 +28,7 @@ RUN npm install -g typescript-language-server.tgz typescript.tgz
 RUN typescript-language-server --version
 
 COPY --from=go-builder /workspace/analyzer-lsp/external-providers/generic-external-provider/generic-external-provider /usr/local/bin/generic-external-provider
-COPY --from=go-builder /workspace/go-tools/gopls/gopls /usr/local/bin/gopls
+COPY --from=go-builder /workspace/tools/gopls/gopls /usr/local/bin/gopls
 COPY --from=go-builder /workspace/analyzer-lsp/LICENSE /licenses/
 COPY --from=go-dep-provider /usr/local/bin/golang-dependency-provider /usr/local/bin/golang-dependency-provider
 
