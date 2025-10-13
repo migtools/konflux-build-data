@@ -8,7 +8,7 @@ RUN go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=
 FROM registry.redhat.io/ubi8/dotnet-80:latest AS dotnet-builder
 COPY --chown=1001:0 . /workspace
 WORKDIR /workspace/csharp-language-server
-# Ignore csharp ls build tests errors, if binary fails to build , the COPY will fail as well for safety
+# Ignore csharp ls build tests errors (if binary fails to build, COPY will fail as well)
 RUN dotnet publish -o bin -p:PublishSingleFile=true ; true
 
 FROM registry.redhat.io/ubi9-minimal:latest
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/.xdg /tmp/.xdg-cache /tmp/.xdg-config
 USER 1001
 EXPOSE 3456
 
-COPY --from=go-builer --chown=1001:0 /workspace/analyzer-lsp/LICENSE /licenses/
+COPY --from=go-builder --chown=1001:0 /workspace/analyzer-lsp/LICENSE /licenses/
 COPY --from=go-builder --chown=1001:0 /workspace/analyzer-lsp/external-providers/dotnet-external-provider/bin /usr/bin
 COPY --from=dotnet-builder --chown=1001:0 /workspace/csharp-language-server/bin/CSharpLanguageServer /opt/app-root/.dotnet/tools/csharp-ls
 
