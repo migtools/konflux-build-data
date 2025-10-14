@@ -62,6 +62,7 @@ COPY --from=static-report /usr/bin/js-bundle-generator /usr/local/bin/js-bundle-
 COPY --from=static-report /usr/local/static-report /usr/local/static-report
 COPY --from=builder --chmod=755 /workspace/kantra/entrypoint.sh /usr/bin/entrypoint.sh
 COPY --from=builder --chmod=755 /workspace/kantra/openrewrite_entrypoint.sh /usr/bin/openrewrite_entrypoint.sh
+COPY --from=builder /workspace/kantra/LICENSE /licenses/
 
 RUN find /opt/rulesets/azure -type f -exec sed -i '/konveyor.io\/target=azure-aks/d' {} +
 RUN find /opt/rulesets/azure -type f -exec sed -i '/konveyor.io\/target=azure-container-apps/d' {} +
