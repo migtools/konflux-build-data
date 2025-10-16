@@ -11,7 +11,7 @@ RUN ansible-galaxy collection install ${HOME}/${COMMUNITY_GENERAL} ${HOME}/${COM
 
 # Fix PG15 is not available on ubi9 streams, needs rhel9 streams, see Brew operator build for details
 #RUN dnf -y module enable postgresql:15 && dnf -y install postgresql python3-psycopg2 python3-jmespath && dnf clean all
-RUN dnf -y install postgresql python3-psycopg2 python3-jmespath && dnf clean all
+RUN dnf -y install python3-psycopg2 python3-jmespath && dnf clean all
 USER 1001
 COPY --chown=1001:0 operator/watches.yaml ${HOME}/watches.yaml
 COPY --chown=1001:0 operator/roles ${HOME}/roles
