@@ -1,0 +1,66 @@
+arches:
+- arch: x86_64
+  module_metadata:
+  - checksum: sha256:fe4e9b35a78386d7bb6b9219fea3bb035ec21389bdb52b54beaf10a2dfc2df43
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 34411
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/repodata/fe4e9b35a78386d7bb6b9219fea3bb035ec21389bdb52b54beaf10a2dfc2df43-modules.yaml.gz
+  packages:
+  - checksum: sha256:49223c484013c214fe1b785d92232a9eff0f0329c5c0cdda8705d992b3ef51f7
+    evr: 13.20-1.el9_5
+    name: libpq
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 218118
+    sourcerpm: libpq-13.20-1.el9_5.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/l/libpq-13.20-1.el9_5.x86_64.rpm
+  - checksum: sha256:e7cefc0e614eb8ec523c68ffb47f6e6f66020e6cfe30d98eba5bdaae53e20125
+    evr: 15.14-1.module+el9.6.0+23419+7863ab62
+    name: postgresql
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 1819593
+    sourcerpm: postgresql-15.14-1.module+el9.6.0+23419+7863ab62.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/p/postgresql-15.14-1.module+el9.6.0+23419+7863ab62.x86_64.rpm
+  - checksum: sha256:e3120c31b423450404fe6316eae8b014d1c808549afbb0b497fc202c95797066
+    evr: 15.14-1.module+el9.6.0+23419+7863ab62
+    name: postgresql-private-libs
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 146920
+    sourcerpm: postgresql-15.14-1.module+el9.6.0+23419+7863ab62.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/p/postgresql-private-libs-15.14-1.module+el9.6.0+23419+7863ab62.x86_64.rpm
+  - checksum: sha256:26687770e4f1691d7716edbb7fcd0ab5a1e3912209614cd81ffd0834d098d5b3
+    evr: 15.14-1.module+el9.6.0+23419+7863ab62
+    name: postgresql-server
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 6619641
+    sourcerpm: postgresql-15.14-1.module+el9.6.0+23419+7863ab62.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/p/postgresql-server-15.14-1.module+el9.6.0+23419+7863ab62.x86_64.rpm
+  - checksum: sha256:6e4fb6dc2ad74949cc1142b2d1f0f8fc7cbf00f32a745c67c1d1eb39271cdbd8
+    evr: 0.9.4-11.el9
+    name: python3-jmespath
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 55363
+    sourcerpm: python-jmespath-0.9.4-11.el9.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/p/python3-jmespath-0.9.4-11.el9.noarch.rpm
+  - checksum: sha256:3de52444439756d75988c8136bf621a02aeaf92683a26284cade355028618d95
+    evr: 2.8.6-6.el9
+    name: python3-psycopg2
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 196446
+    sourcerpm: python-psycopg2-2.8.6-6.el9.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/p/python3-psycopg2-2.8.6-6.el9.x86_64.rpm
+  - checksum: sha256:1ea6ee313827c1f5d1a73ea84c2f72b3f6567bf821a019efbd6caee00e3d5543
+    evr: 67.1-10.el9_6
+    name: libicu
+    repoid: rhel-9-for-x86_64-baseos-rpms
+    size: 10037375
+    sourcerpm: icu-67.1-10.el9_6.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/os/Packages/l/libicu-67.1-10.el9_6.x86_64.rpm
+  source:
+  - checksum: sha256:3abe8dc1abc22213826dd6ffb214cdd88705def93dcb234ffc87c792909b0879
+    evr: 67.1-10.el9_6
+    name: icu
+    repoid: rhel-9-for-x86_64-baseos-source-rpms
+    size: 23181317
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/source/SRPMS/Packages/i/icu-67.1-10.el9_6.src.rpm
+lockfileVendor: redhat
+lockfileVersion: 1

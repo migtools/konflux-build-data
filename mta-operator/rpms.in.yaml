@@ -1,0 +1,11 @@
+packages:
+  - python3-psycopg2
+  - python3-jmespath
+  - "@postgresql:15"
+moduleEnable:
+  - postgresql:15
+arches:
+  - x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo
