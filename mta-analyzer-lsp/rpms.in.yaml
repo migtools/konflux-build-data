@@ -1,0 +1,9 @@
+packages:
+  - python3-devel
+  - gcc-c++
+arches:
+#  - aarch64
+  - x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo
