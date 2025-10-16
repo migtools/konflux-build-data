@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/nodejs-20:1-1758500456 AS builder
+FROM registry.redhat.io/ubi9/nodejs-20:latest AS builder
 COPY --chown=1001:0 . /workspace
 WORKDIR /workspace/ui
 
@@ -16,9 +16,9 @@ RUN sed -i 's/^    "npm": "^9.5.0"/    "npm": ">=9.5.0"/' package.json
 RUN npm config fix
 RUN npm clean-install --ignore-scripts --no-audit --verbose && npm run build && npm run dist
 
-FROM registry.redhat.io/ubi9/nodejs-20-minimal:1-1758213568
+FROM registry.redhat.io/ubi9/nodejs-20-minimal:latest
 USER root
-RUN microdnf -y install tar procps-ng && microdnf -y clean all
+RUN microdnf -y install procps-ng && microdnf -y clean all
 USER 1001
 
 COPY --from=builder /workspace/ui/dist /opt/app-root/dist/
