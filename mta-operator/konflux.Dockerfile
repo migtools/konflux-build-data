@@ -1,4 +1,4 @@
-FROM registry.redhat.io/openshift4/ose-ansible-rhel9-operator:v4.17.0
+FROM registry.redhat.io/openshift4/ose-ansible-rhel9-operator:v4.17
 USER root
 COPY operator/tools/upgrades/migrate-pathfinder-assessments.py /usr/local/bin/migrate-pathfinder-assessments.py
 COPY operator/tools/upgrades/jwt.sh /usr/local/bin/jwt.sh
@@ -9,8 +9,6 @@ COPY ${COMMUNITY_GENERAL} ${HOME}/${COMMUNITY_GENERAL}
 COPY ${COMMUNITY_POSTGRESQL} ${HOME}/${COMMUNITY_POSTGRESQL}
 RUN ansible-galaxy collection install ${HOME}/${COMMUNITY_GENERAL} ${HOME}/${COMMUNITY_POSTGRESQL} && rm ${HOME}/${COMMUNITY_GENERAL} ${HOME}/${COMMUNITY_POSTGRESQL}
 
-# Fix PG15 is not available on ubi9 streams, needs rhel9 streams, see Brew operator build for details
-#RUN dnf -y module enable postgresql:15 && dnf -y install postgresql python3-psycopg2 python3-jmespath && dnf clean all
 RUN dnf install -y python3-psycopg2 python3-jmespath && dnf clean all
 RUN dnf module install -y postgresql:15 && dnf clean all
 USER 1001
