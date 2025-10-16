@@ -1,0 +1,7 @@
+packages:
+  - procps-ng
+arches:
+  - x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo

@@ -1,0 +1,20 @@
+arches:
+- arch: x86_64
+  module_metadata: []
+  packages:
+  - checksum: sha256:506ad778f63821e8d9647ca8e0a3ff21b8af9c1666060d5200f9b26ee718333c
+    evr: 3.3.17-14.el9
+    name: procps-ng
+    repoid: rhel-9-for-x86_64-baseos-rpms
+    size: 361526
+    sourcerpm: procps-ng-3.3.17-14.el9.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/os/Packages/p/procps-ng-3.3.17-14.el9.x86_64.rpm
+  source:
+  - checksum: sha256:acfd5c270ba5724a0f5f2a84cc47ee222d6a03095421fddbf6932375ec7d67f0
+    evr: 3.3.17-14.el9
+    name: procps-ng
+    repoid: rhel-9-for-x86_64-baseos-source-rpms
+    size: 1054334
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/source/SRPMS/Packages/p/procps-ng-3.3.17-14.el9.src.rpm
+lockfileVendor: redhat
+lockfileVersion: 1
