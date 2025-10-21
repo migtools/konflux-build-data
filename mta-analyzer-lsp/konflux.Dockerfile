@@ -11,7 +11,7 @@ RUN cd external-providers/golang-dependency-provider && go mod edit -replace=git
 RUN cd external-providers/generic-external-provider && go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=1 go build -tags strictfipsruntime -o generic-external-provider main.go
 RUN cd external-providers/java-external-provider && go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=1 go build -tags strictfipsruntime -o java-external-provider main.go
 
-# FIXME: Runtime mta-jdtls-server-base (To be removed in release-0.5)
+# FIXME: Runtime mta-jdtls-server-base (To be removed in release-0.5 pending)
 FROM brew.registry.redhat.io/rh-osbs/mta-mta-jdtls-server-base-rhel9:8.0.0
 RUN microdnf -y install python3-devel gcc-c++
 
