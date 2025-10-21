@@ -30,7 +30,12 @@ spec:
     value: 5d
   - name: build-platforms
     value:
+#    - linux/aarch64
     - linux/x86_64
+  - name: hermetic
+    value: 'true'
+  - name: prefetch-input
+    value: '[{"type": "rpm", "path": "mta-cli/"}, {"type": "gomod", "path": "mta-cli/kantra/"}]'
   - name: dockerfile
     value: konflux.Dockerfile
   - name: path-context

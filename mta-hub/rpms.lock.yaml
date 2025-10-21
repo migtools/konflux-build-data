@@ -1,0 +1,33 @@
+arches:
+- arch: x86_64
+  module_metadata: []
+  packages:
+  - checksum: sha256:1a3467777f4de6d7dd06d69ff0b90c9de7513a0b77d465e71fd48720b3d9d4af
+    evr: 3.34.1-8.el9_6
+    name: sqlite
+    repoid: rhel-9-for-x86_64-appstream-rpms
+    size: 764057
+    sourcerpm: sqlite-3.34.1-8.el9_6.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/appstream/os/Packages/s/sqlite-3.34.1-8.el9_6.x86_64.rpm
+  - checksum: sha256:f379686df99db814e30568a896b417278775fc96864ac6d2660bf48ef94309e3
+    evr: 1:3.2.2-6.el9_5.1
+    name: openssl
+    repoid: rhel-9-for-x86_64-baseos-rpms
+    size: 1420999
+    sourcerpm: openssl-3.2.2-6.el9_5.1.src.rpm
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/os/Packages/o/openssl-3.2.2-6.el9_5.1.x86_64.rpm
+  source:
+  - checksum: sha256:56c0b951be3e5ad6a1da594f9d4f09b8b752e2fb3d6827bcc03892f22f622b22
+    evr: 1:3.2.2-6.el9_5.1
+    name: openssl
+    repoid: rhel-9-for-x86_64-baseos-source-rpms
+    size: 17985138
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/source/SRPMS/Packages/o/openssl-3.2.2-6.el9_5.1.src.rpm
+  - checksum: sha256:ca9c26565fc4cdfdd8b813a116bb6bba1b36db634bb4b38602cc02f008db064c
+    evr: 3.34.1-8.el9_6
+    name: sqlite
+    repoid: rhel-9-for-x86_64-baseos-source-rpms
+    size: 25109243
+    url: https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/source/SRPMS/Packages/s/sqlite-3.34.1-8.el9_6.src.rpm
+lockfileVendor: redhat
+lockfileVersion: 1
