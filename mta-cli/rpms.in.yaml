@@ -1,0 +1,8 @@
+packages:
+  - podman
+arches:
+  - aarch64
+  - x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo
