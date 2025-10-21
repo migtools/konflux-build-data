@@ -27,7 +27,7 @@ spec:
     value: quay.io/redhat-user-workloads/ocp-art-tenant/mta-8-0-analyzer-rpc:{{revision}}
   - name: build-platforms
     value:
-    - linux/aarch64
+#    - linux/aarch64
     - linux/x86_64
   - name: hermetic
     value: 'true'
