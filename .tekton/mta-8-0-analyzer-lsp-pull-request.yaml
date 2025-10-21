@@ -30,7 +30,7 @@ spec:
     value: 5d
   - name: build-platforms
     value:
-#    - linux/aarch64
+#   - linux/aarch64
     - linux/x86_64
   - name: hermetic
     value: 'true'
