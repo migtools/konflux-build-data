@@ -1,0 +1,12 @@
+packages:
+  - glibc-langpack-en
+  - openssh-clients
+  - openssl
+  - subversion
+  - git
+  - tar
+arches:
+  - x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo
