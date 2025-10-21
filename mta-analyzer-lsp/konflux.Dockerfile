@@ -1,7 +1,7 @@
 FROM registry.redhat.io/ubi9/go-toolset:1.23 AS builder
 COPY --chown=1001:0 . /workspace
 
-# FIXME: golang dependency provider, generic-external-provider and java-external-provider need to be cleaned from this , they build on their own in release-0.5
+# FIXME: golang dependency provider, generic-external-provider and java-external-provider need to be cleaned from this, they build on their own in release-0.5
 WORKDIR /workspace/analyzer-lsp
 
 ENV GOEXPERIMENT strictfipsruntime
@@ -11,9 +11,9 @@ RUN cd external-providers/golang-dependency-provider && go mod edit -replace=git
 RUN cd external-providers/generic-external-provider && go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=1 go build -tags strictfipsruntime -o generic-external-provider main.go
 RUN cd external-providers/java-external-provider && go mod edit -replace=github.com/konveyor/analyzer-lsp=../../ && CGO_ENABLED=1 go build -tags strictfipsruntime -o java-external-provider main.go
 
-# FIXME: Runtime mta-jdtls-server-base (To be removed in release-0.5)
+# FIXME: Runtime mta-jdtls-server-base (To be removed in release-0.5 pending)
 FROM brew.registry.redhat.io/rh-osbs/mta-mta-jdtls-server-base-rhel9:8.0.0
-RUN microdnf -y install openssl python-devel python3-devel gcc-c++
+RUN microdnf -y install python3-devel gcc-c++
 
 RUN mkdir /analyzer-lsp
 
