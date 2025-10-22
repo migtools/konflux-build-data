@@ -1,0 +1,15 @@
+packages:
+  - openssl
+  - gcc-c++
+  - python3-devel
+  - python-devel
+  - tar
+  - "@nodejs:18"
+arches:
+  - aarch64
+  - x86_64
+moduleEnable:
+  - nodejs:18
+contentOrigin:
+  repofiles:
+  - ./redhat.repo

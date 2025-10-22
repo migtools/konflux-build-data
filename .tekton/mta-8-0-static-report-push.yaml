@@ -27,7 +27,12 @@ spec:
     value: quay.io/redhat-user-workloads/ocp-art-tenant/mta-8-0-static-report:{{revision}}
   - name: build-platforms
     value:
+#    - linux/aarch64
     - linux/x86_64
+  - name: hermetic
+    value: 'true'
+  - name: prefetch-input
+    value: '[{"type": "rpm", "path": "mta-static-report/"}, {"type": "npm", "path": "mta-static-report/static-report/"}, {"type": "gomod", "path": "mta-static-report/static-report/analyzer-output-parser/"}]'
   - name: dockerfile
     value: konflux.Dockerfile
   - name: path-context

@@ -28,6 +28,10 @@ spec:
   - name: build-platforms
     value:
     - linux/x86_64
+  - name: hermetic
+    value: 'true'
+  - name: prefetch-input
+    value: '[{"type": "gomod", "path": "mta-discovery-addon/discovery-addon/"}, {"type": "rpm", "path": "mta-discovery-addon/"}]'
   - name: dockerfile
     value: konflux.Dockerfile
   - name: path-context

@@ -27,7 +27,12 @@ spec:
     value: quay.io/redhat-user-workloads/ocp-art-tenant/mta-8-0-generic-external-provider:{{revision}}
   - name: build-platforms
     value:
+#    - linux/aarch64
     - linux/x86_64
+  - name: hermetic
+    value: 'true'
+  - name: prefetch-input
+    value: '[{"type": "gomod", "path": "mta-generic-external-provider/analyzer-lsp/"}, {"type": "gomod", "path": "mta-generic-external-provider/analyzer-lsp/external-providers/generic-external-provider/"}, {"type": "gomod", "path": "mta-generic-external-provider/analyzer-lsp/external-providers/golang-dependency-provider/"}, {"type": "gomod", "path": "mta-generic-external-provider/tools/gopls/"}, {"type": "rpm", "path": "mta-generic-external-provider/"}]'
   - name: dockerfile
     value: konflux.Dockerfile
   - name: path-context
