@@ -50,7 +50,7 @@ RUN mkdir kai_mcp_solution_server
 COPY --from=app /workspace/kai/kai_mcp_solution_server/README.md kai_mcp_solution_server/README.md
 COPY --from=app /workspace/kai/kai_mcp_solution_server/pyproject.toml kai_mcp_solution_server/pyproject.toml
 COPY --from=app /workspace/kai/kai_mcp_solution_server/requirements.txt kai_mcp_solution_server/requirements.txt
-#COPY --from=app /workspace/kai/kai_mcp_solution_server/requirements-build.txt kai_mcp_solution_server/requirements-build.txt
+COPY --from=app /workspace/kai/kai_mcp_solution_server/requirements-build.txt kai_mcp_solution_server/requirements-build.txt
 COPY --from=app /workspace/kai/kai_mcp_solution_server/src/ kai_mcp_solution_server/src/
 COPY --from=app /workspace/kai/LICENSE /licenses/
 #COPY --from=deps /workspace/hermeto-output/ hermeto-output/
