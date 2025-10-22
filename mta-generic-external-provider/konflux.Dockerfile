@@ -11,6 +11,7 @@ RUN CGO_ENABLED=1 go build -tags strictfipsruntime -buildvcs=false
 FROM brew.registry.redhat.io/rh-osbs/mta-mta-golang-dependency-provider-rhel9:8.0.0 as go-dep-provider
 
 FROM registry.redhat.io/ubi9-minimal:latest
+RUN microdnf -y module enable nodejs:18
 RUN microdnf -y install openssl gcc-c++ python-devel python3-devel nodejs tar && microdnf -y clean all
 
 # Python LSP server
