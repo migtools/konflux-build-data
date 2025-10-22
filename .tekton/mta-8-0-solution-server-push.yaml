@@ -31,7 +31,7 @@ spec:
   - name: hermetic
     value: 'true'
   - name: prefetch-input
-    value: '[{"type": "rpm", "path": "mta-solution-server/"}, {"type": "pip", "path": "mta-solution-server/kai/kai_mcp_solution_server/"}]'
+    value: '[{"type": "rpm", "path": "mta-solution-server/"}, {"type": "pip", "path": "mta-solution-server/kai/kai_mcp_solution_server/", "allow_binary": "true"}]'
   - name: dockerfile
     value: konflux.Dockerfile
   - name: path-context
