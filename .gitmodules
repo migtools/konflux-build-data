@@ -53,8 +53,8 @@
 	url = https://github.com/razzmatazz/csharp-language-server
 [submodule "mta-solution-server/kai"]
 	path = mta-solution-server/kai
-	url = https://github.com/konveyor/kai
-	branch = release-0.8
+	url = https://github.com/fbladilo/kai
+	branch = build_konflux1
 [submodule "mta-ui/ui"]
 	path = mta-ui/ui
 	url = https://github.com/konveyor/tackle2-ui.git
