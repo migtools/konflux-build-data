@@ -1,0 +1,20 @@
+packages:
+  - autoconf
+  - automake
+  - cargo
+  - cmake
+  - gcc
+  - gcc-c++
+  - git
+  - libffi-devel
+  - libpq-devel
+  - ninja-build
+  - python3.12-cryptography
+  - python3.12-devel
+  - python3.12-pip
+  - python3.12-numpy
+arches:
+  - x86_64
+contentOrigin:
+  repofiles:
+  - ./redhat.repo
